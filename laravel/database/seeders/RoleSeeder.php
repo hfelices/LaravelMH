@@ -13,8 +13,6 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('roles')->truncate();
-
         // Insertar roles
         DB::table('roles')->insert([
             ['name' => 'author'],

@@ -22,10 +22,10 @@ return new class extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->nullable();
         });
 
-        Artisan::call('db:seed', [
-            '--class' => 'RoleSeeder',
-            '--force' => true
-         ]);
+        // Artisan::call('db:seed', [
+        //     '--class' => 'RoleSeeder',
+        //     '--force' => true
+        //  ]);
          
     }
     
