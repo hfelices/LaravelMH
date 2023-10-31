@@ -23,11 +23,30 @@
                       <tbody>
                           @foreach ($files as $file)
                           <tr>
-                              <td>{{ $file->id }}</td>
-                              <td>{{ $file->filepath }}</td>
-                              <td>{{ $file->filesize }}</td>
-                              <td>{{ $file->created_at }}</td>
-                              <td>{{ $file->updated_at }}</td>
+                                <td class="w-1/6">{{ $file->id }}</td>
+                                <td class="w-1/6"><img class="w-3/6" src='{{ asset("storage/{$file->filepath}") }}'  alt="File Image" /></td>
+                                <td class="w-1/6">{{ $file->filesize }}</td>
+                                <td class="w-1/6">{{ $file->created_at }}</td>
+                                <td class="w-1/6">{{ $file->updated_at }}</td>
+                                <td>
+                                    <div class="flex items-center justify-center space-x-4">
+                                        <a href="{{ route('files.show', $file->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                                            Mostrar
+                                        </a>
+                                        
+                                        <a href="{{ route('files.edit', $file) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
+                                            Editar
+                                        </a>
+                                        
+                                        <form action="{{ route('files.destroy', $file) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
                           </tr>
                           @endforeach
                       </tbody>

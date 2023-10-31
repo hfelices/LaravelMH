@@ -8,6 +8,7 @@
     </ul>
     </div>
     @endif
+    
     <form method="post" action="{{ route('files.store') }}" enctype="multipart/form-data" class="max-w-md mx-auto">
         @csrf
         <div class="mb-4">
@@ -19,4 +20,5 @@
             <button type="reset" class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray focus:border-gray-700 active:bg-gray-800">Reset</button>
         </div>
     </form>
+ 
 </x-app-layout>
