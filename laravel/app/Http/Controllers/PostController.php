@@ -214,6 +214,7 @@ class PostController extends Controller
         $filePath = $post->file->filepath;
         \Storage::disk('public')->delete($filePath);
         $post->delete();
+        $post->file->delete();
         return redirect()->route('posts.index')
             ->with('success', 'File successfully eliminated');
     }
