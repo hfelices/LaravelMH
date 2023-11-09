@@ -102,7 +102,7 @@ class FileController extends Controller
        $validatedData = $request->validate([
         'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
      ]);
-
+        
          // Obtenir dades del fitxer
        $upload = $request->file('upload');
        $fileName = $upload->getClientOriginalName();
