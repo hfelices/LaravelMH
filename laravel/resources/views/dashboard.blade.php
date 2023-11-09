@@ -8,6 +8,8 @@
         <a href="{{ url('/files') }}">{{ __('Files') }}</a>
         <br>
         <a href="{{ url('/posts') }}">{{ __('Posts') }}</a>
+        <br>
+        <a href="{{ url('/places') }}">{{ __('Places') }}</a>
     </x-slot>
 
     <div class="py-12">
