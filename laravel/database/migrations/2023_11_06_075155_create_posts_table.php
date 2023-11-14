@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('body', 255);
-            $table->bigInteger('file_id');
+            $table->unsignedBigInteger('file_id');
             $table->float('latitude');
             $table->float('longitude');
             
             $table->bigInteger('author_id')->unsigned(); 
             $table->timestamps();
 
-            
+            $table->foreign('file_id')->references('id')->on('files');
             $table->foreign('author_id')->references('id')->on('users');
 
 

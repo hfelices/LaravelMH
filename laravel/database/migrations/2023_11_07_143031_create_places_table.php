@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name',255);
             $table->string('description',255);
-            $table->bigInteger('file_id');
+            $table->unsignedBigInteger('file_id');
             $table->float('latitude');
             $table->float('longitude');
-            $table->bigInteger('author_id');
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
 
             $table->foreign('file_id')->references('id')->on('files');
