@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -17,12 +19,39 @@ class PostController extends Controller
     
             // Realizar la búsqueda en la base de datos
             $posts = Post::where('body', 'like', "%$searchTerm%")->paginate(5);
-    
+
+            foreach ($posts->items() as $post) {
+                
+                $likes = Like::where('post_id', $post->id)->get();
+                
+
+                $liked = Like::where('post_id', $post->id)
+                            ->where('user_id', Auth::user()->id)
+                            ->get();
+                $likedByUser = ($liked->count() > 0) ? true : false;
+
+                $post->likes = $likes->count();
+                $post->likedByUser = $likedByUser;
+            }
+
             return view('posts.index', compact('posts'));
         } else {
-            return view("posts.index", [
-                "posts" => Post::paginate(5),
-            ]);
+
+            $posts =  Post::paginate(5);
+
+            foreach ($posts->items() as $post) {
+                
+                $likes = Like::where('post_id', $post->id)->get();
+
+                $liked = Like::where('post_id', $post->id)
+                                ->where('user_id', Auth::user()->id)
+                                ->get();
+                $likedByUser = ($liked->count() > 0) ? true : false;
+
+                $post->likes = $likes->count();
+                $post->likedByUser = $likedByUser;
+            }
+            return view("posts.index", compact('posts'));
         }
     }
  
@@ -105,7 +134,15 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-    return view("posts.show")->with(['post' => $post]);
+        $user_id = Auth::user()->id;
+        $likes = Like::where('post_id', $post->id)->get();
+        $liked = Like::where('post_id', $post->id)
+                    ->where('user_id', $user_id)
+                    ->get();
+
+        $likesNum = $likes->count();
+        $likedByUser = ($liked->count() > 0) ? true : false;
+    return view("posts.show")->with(['post' => $post,'likes' => $likesNum , 'likedByUser' => $likedByUser]);
     }   
 
     /**
@@ -186,8 +223,7 @@ class PostController extends Controller
            
             \Log::debug("Disk storage FAILS");
             // Patró PRG amb missatge d'error
-            return redirect()->route("posts.edit",$post)
-                ->with('error', 'ERROR uploading file');
+            
         }
         
         
@@ -200,6 +236,10 @@ class PostController extends Controller
             // 'visibility_id',
             'author_id'=>$request->user()->id,     
         ]);
+        
+        
+       
+       
         
         return redirect()->route('posts.show', $post)
             ->with('success', 'File successfully saved'); 
@@ -219,8 +259,27 @@ class PostController extends Controller
             ->with('success', 'File successfully eliminated');
     }
 
-    public function search(Request $request)
+    public function like(Request $request, Post $post)
     {
+        $like = Like::create([
+            'user_id' => $request->user()->id,
+            'post_id' => $post->id,
+        ]);
         
+
+        return back();
+        
+    }
+
+    public function unlike(Post $post)
+    {
+        $user_id = Auth::user()->id;
+        $like = Like::where('post_id', $post->id)
+                    ->where('user_id', $user_id)
+                    ->first();
+        
+        $like->delete();
+
+        return back(); 
     }
 }

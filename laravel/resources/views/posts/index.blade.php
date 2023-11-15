@@ -30,11 +30,37 @@
                                 </div>
                                 <p class="text-gray-700 mb-4 max-w-full break-words">{{ $post->body }}</p>
                                 <img class="w-1/1 mx-auto mb-4" src='{{ asset("storage/{$post->file->filepath}") }}' alt="File Image" />
+                        </a>
                                 <div class="flex justify-between text-gray-600">
                                     <p>{{ $post->created_at->diffForHumans() }}</p>
+                                    @if ($post->likedByUser)
+                                    <form action="{{ route('posts.unlike', $post) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="flex">
+                                            <p class="mr-1">{{ $post->likes }} </p>
+                                            <button type="submit" class="btn-like">
+                                                <i class="far fa-thumbs-down"></i>
+                                            </button>
+                                        </div>
+                                        
+                                    </form>
+                                    @else
+                                    <form action="{{ route('posts.like', $post) }}" method="POST">
+                                        @csrf
+                                        <div class="flex">
+                                            <p class="mr-1">{{ $post->likes }} </p>
+                                            <button type="submit" class="btn-like">
+                                                <i class="fa-regular fa-thumbs-up"></i>
+                                            </button>
+                                        </div>
+                                        
+                                    </form>
+                                    @endif
+                                    
                                 </div>
                             </div> 
-                        </a>
+                       
                     @endforeach
 
                    

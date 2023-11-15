@@ -41,4 +41,9 @@ Route::get('mail/test', [MailController::class, 'test']);
 Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
 Route::resource('posts', PostController::class)->middleware(['auth', 'role.any:1,2,3']);
 Route::resource('places', PlaceController::class)->middleware(['auth', 'role.any:1,2,3']);
+
+
+Route::post('/posts/{post}/likes', [PostController::class, 'like'])->name('posts.like')->middleware(['auth', 'role.any:1,2,3']);
+Route::delete('/posts/{post}/likes',[ PostController::class, 'unlike'])->name('posts.unlike')->middleware(['auth', 'role.any:1,2,3']);
+
 require __DIR__.'/auth.php';

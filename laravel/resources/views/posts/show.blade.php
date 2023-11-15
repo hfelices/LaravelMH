@@ -18,7 +18,32 @@
     </div>
     <div class="flex justify-between text-gray-600">
         <p>{{ $post->created_at->diffForHumans() }}</p>
+        @if ($likedByUser)
+        <form action="{{ route('posts.unlike', $post) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="flex">
+                <p class="mr-1">{{ $likes }} </p>
+                <button type="submit" class="btn-like">
+                    <i class="far fa-thumbs-down"></i>
+                </button>
+            </div>
+            
+        </form>
+        @else
+        <form action="{{ route('posts.like', $post) }}" method="POST">
+            @csrf
+            <div class="flex">
+                <p class="mr-1">{{ $likes }} </p>
+                <button type="submit" class="btn-like">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                </button>
+            </div>
+            
+        </form>
+        @endif
     </div>
+    
 </div>
 <div class="flex items-center justify-center space-x-4 mt-2">    
     <a href="{{ route('posts.edit', $post) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
