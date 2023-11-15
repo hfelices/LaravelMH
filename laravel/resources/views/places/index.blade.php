@@ -12,7 +12,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex items-center justify-center space-x-4">
                 <a href="{{ route('places.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                    Create
+                    + Create
                 </a>
                 </div>
                    <table class="table">
@@ -30,8 +30,8 @@
                           </tr>
                       </thead>
                       <tbody>
-                          @foreach ($places as $place)
-                          <tr>
+                            @foreach ($places as $index => $place)
+                            <tr>
                                 <td class="text-center text-2xl font-bold mb-4">{{$place['id']}}</td>
                                 <td class="text-center w-1/6">{{ $place->name }}</td>
                                 <td class="text-center w-1/6">{{ $place->description }}</td>
@@ -57,6 +57,18 @@
                                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
                                                 Eliminar
                                             </button>
+                                        </form>
+                                        <form action="{{ route('places.favorite', $place->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @if ($userFavs[$index])
+                                                <button type="submit" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                                                    {{ $favorites[$index] }} <i class="fa-solid fa-heart"></i>
+                                                </button>
+                                            @else
+                                                <button type="submit" class="bg-yellow-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                                                    {{ $favorites[$index] }} <i class="fa-regular fa-heart"></i>
+                                                </button>
+                                            @endif
                                         </form>
                                     </div>
                                 </td>
