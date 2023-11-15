@@ -18,39 +18,32 @@ class PostController extends Controller
             $searchTerm = $request->input('search');
     
             // Realizar la búsqueda en la base de datos
-            $posts = Post::where('body', 'like', "%$searchTerm%")->paginate(5);
+            $posts = Post::withCount('liked')
+                            ->where('body', 'like', "%$searchTerm%")
+                            ->paginate(5);
 
             foreach ($posts->items() as $post) {
-                
-                $likes = Like::where('post_id', $post->id)->get();
-                
-
                 $liked = Like::where('post_id', $post->id)
                             ->where('user_id', Auth::user()->id)
                             ->get();
                 $likedByUser = ($liked->count() > 0) ? true : false;
-
-                $post->likes = $likes->count();
                 $post->likedByUser = $likedByUser;
             }
 
             return view('posts.index', compact('posts'));
         } else {
 
-            $posts =  Post::paginate(5);
-
+            $posts =  Post::withCount('liked')
+                            ->paginate(5);
+            
             foreach ($posts->items() as $post) {
-                
-                $likes = Like::where('post_id', $post->id)->get();
-
                 $liked = Like::where('post_id', $post->id)
-                                ->where('user_id', Auth::user()->id)
-                                ->get();
+                            ->where('user_id', Auth::user()->id)
+                            ->get();
                 $likedByUser = ($liked->count() > 0) ? true : false;
-
-                $post->likes = $likes->count();
                 $post->likedByUser = $likedByUser;
             }
+                
             return view("posts.index", compact('posts'));
         }
     }

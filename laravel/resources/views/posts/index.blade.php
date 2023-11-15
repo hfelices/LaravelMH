@@ -38,7 +38,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <div class="flex">
-                                            <p class="mr-1">{{ $post->likes }} </p>
+                                            <p class="mr-1">{{ $post->liked_count }} </p>
                                             <button type="submit" class="btn-like">
                                                 <i class="far fa-thumbs-down"></i>
                                             </button>
@@ -49,7 +49,7 @@
                                     <form action="{{ route('posts.like', $post) }}" method="POST">
                                         @csrf
                                         <div class="flex">
-                                            <p class="mr-1">{{ $post->likes }} </p>
+                                            <p class="mr-1">{{ $post->liked_count }} </p>
                                             <button type="submit" class="btn-like">
                                                 <i class="fa-regular fa-thumbs-up"></i>
                                             </button>
