@@ -5,10 +5,13 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
+
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -58,5 +61,17 @@ class User extends Authenticatable
     return $this->belongsToMany(Post::class, 'likes');
     }
 
+
     
+    public function canAccessFilament(): bool
+    {
+        
+        if ($this->role_id === 2 || $this->role_id === 3) {
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+ 
 }

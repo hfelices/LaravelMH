@@ -30,6 +30,8 @@ class PostController extends Controller
                 $post->likedByUser = $likedByUser;
             }
 
+            
+
             return view('posts.index', compact('posts'));
         } else {
 
@@ -43,7 +45,7 @@ class PostController extends Controller
                 $likedByUser = ($liked->count() > 0) ? true : false;
                 $post->likedByUser = $likedByUser;
             }
-                
+             
             return view("posts.index", compact('posts'));
         }
     }
