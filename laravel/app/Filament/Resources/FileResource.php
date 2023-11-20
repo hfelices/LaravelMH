@@ -8,6 +8,7 @@ use App\Models\File;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,11 +24,11 @@ class FileResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('filepath')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('filesize')
-                    ->required(),
+                Forms\Components\FileUpload::make('filepath')
+                                            ->required()
+                                            ->image()
+                                            ->preserveFilenames()
+                                            ->directory('uploads'),
             ]);
     }
 

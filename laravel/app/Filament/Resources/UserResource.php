@@ -23,7 +23,10 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('role_id'),
+                Forms\Components\Select::make('role_id')
+                                        ->relationship('role', 'name')
+                                        ->required(),
+
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
