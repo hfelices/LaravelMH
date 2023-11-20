@@ -25,7 +25,7 @@ Route::get('/', function (Request $request) {
     $request->session()->flash('info', $message);
     return view('welcome');
 });
- 
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -41,6 +41,10 @@ Route::get('mail/test', [MailController::class, 'test']);
 Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
 Route::resource('posts', PostController::class)->middleware(['auth', 'role.any:1,2,3']);
 Route::resource('places', PlaceController::class)->middleware(['auth', 'role.any:1,2,3']);
+
+Route::post('/places/{place}/favorite', [PlaceController::class, 'favorite'])->name('places.favorite')->middleware(['auth', 'role.any:1,2,3']);
+Route::delete('/places/{place}/unfavorite', [PlaceController::class, 'unfavorite'])->name('places.unfavorite')->middleware(['auth', 'role.any:1,2,3']);
+
 
 
 Route::post('/posts/{post}/likes', [PostController::class, 'like'])->name('posts.like')->middleware(['auth', 'role.any:1,2,3']);

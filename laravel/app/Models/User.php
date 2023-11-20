@@ -49,7 +49,11 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Place::class, 'author_id');
     }
-
+    public function favorites()
+    {
+       return $this->belongsToMany(Place::class, 'favorites');
+    }
+    
 
     public function posts()
     {
