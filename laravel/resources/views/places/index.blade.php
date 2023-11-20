@@ -60,13 +60,13 @@
                                         </form>
                                         <form action="{{ route('places.favorite', $place->id) }}" method="POST" style="display: inline;">
                                             @csrf
-                                            @if ($userFavs[$index])
+                                            @if ( $place->favoritedByUser )
                                                 <button type="submit" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                                                    {{ $favorites[$index] }} <i class="fa-solid fa-heart"></i>
+                                                    {{ $place->favorited_count }} <i class="fa-solid fa-heart"></i>
                                                 </button>
                                             @else
                                                 <button type="submit" class="bg-yellow-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                                                    {{ $favorites[$index] }} <i class="fa-regular fa-heart"></i>
+                                                    {{ $place->favorited_count }} <i class="fa-regular fa-heart"></i>
                                                 </button>
                                             @endif
                                         </form>

@@ -17,45 +17,33 @@ class PlaceController extends Controller
     {
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
-    
+   
             // Realizar la búsqueda en la base de datos
-            $places = Place::where('description', 'like', "%$searchTerm%")->paginate(5);
-            $favorites = [];
-            $userFavs = [];
-            foreach ($places as $place) {
-                $favorite = Favorite::where('place_id', $place->id)->get();
-                if ($favorite){
-                    $favorite = $favorite->count();
-                }
-                else{
-                    $favorite = 0;
-                }
-                array_push($favorites, $favorite);
-                $favorited = Favorite::where('place_id',$place->id)->where('user_id', $request->user()->id)->get();
-                $userFav = ($favorited->count() > 0) ? true : false;   
-                array_push($userFavs,$userFav);
+            $places = Place::withCount('favorited')
+            ->where('body', 'like', "%$searchTerm%")
+            ->paginate(5);
+            foreach ($places->items() as $place) {
+                $favorited = Favorite::where('place_id', $place->id)
+                            ->where('user_id', \Auth::user()->id)
+                            ->get();
+                $favoritedByUser = ($favorited->count() > 0) ? true : false;
+                $place->favoritedByUser = $favoritedByUser;
             }
-            return view('places.index', compact('places'))->with(['favorites' => $favorites, 'userFavs' => $userFavs]);
+            return view("places.index", compact('places'));
+           
+            return view('places.index', compact('places'));
         } else {
-            $places = Place::paginate(5);
-            $favorites = [];
-            $userFavs = [];
-            foreach ($places as $place) {
-                $favorite = Favorite::where('place_id', $place->id)->get();
-                if ($favorite){
-                    $favorite = $favorite->count();
-                }
-                else{
-                    $favorite = 0;
-                }
-                array_push($favorites, $favorite);
-                $favorited = Favorite::where('place_id',$place->id)->where('user_id', $request->user()->id)->get();
-                $userFav = ($favorited->count() > 0) ? true : false;   
-                array_push($userFavs,$userFav);
+            $places =  Place::withCount('favorited')
+                            ->paginate(5);
+            
+            foreach ($places->items() as $place) {
+                $favorited = Favorite::where('place_id', $place->id)
+                            ->where('user_id', \Auth::user()->id)
+                            ->get();
+                $favoritedByUser = ($favorited->count() > 0) ? true : false;
+                $place->favoritedByUser = $favoritedByUser;
             }
-            return view("places.index", [
-                "places" => Place::paginate(5),
-            ])->with(['favorites' => $favorites, 'userFavs' => $userFavs]);
+            return view("places.index", compact('places'));
         }
     }
  
@@ -136,21 +124,14 @@ class PlaceController extends Controller
     public function show(Request $request, Place $place)
     {
         $favorited = Favorite::where('place_id',$place->id)->where('user_id', $request->user()->id)->get();
-        $userFav = ($favorited->count() > 0) ? true : false;        
-        \Log::debug($userFav);
-        // if (Favorite::where('place_id',$place->id)->where('user_id', $request->user()->id)->first()){
-        //     $userFav = True;
-        // } else {
-        //     $userFav = False;
-        // }
-
+        $userFav = ($favorited->count() > 0) ? true : false;     
         $favorites = Favorite::where('place_id',$place->id)->get();
         if ($favorites){
             $favorites = $favorites->count();
-        }
-        else{
+        } else{
             $favorites = 0;
         }
+        
         return view("places.show")->with(['place' => $place, 'favorites' => $favorites, 'userFav' => $userFav]);
     }
 
