@@ -11,12 +11,15 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Livewire;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire;
 
 class FileResource extends Resource
 {
+
     protected static ?string $model = File::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -39,9 +42,10 @@ class FileResource extends Resource
 
     public static function table(Table $table): Table
     {
+        
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('filepath'),
+                Tables\Columns\ImageColumn::make('filepath')->square()->width(100)->height(100),
                 Tables\Columns\TextColumn::make('filesize'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
