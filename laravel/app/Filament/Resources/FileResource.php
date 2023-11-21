@@ -27,8 +27,12 @@ class FileResource extends Resource
                 Forms\Components\FileUpload::make('filepath')
                                             ->required()
                                             ->image()
-                                            ->preserveFilenames()
-                                            ->directory('uploads'),
+                                            ->maxSize(2048)
+                                            ->directory('uploads')
+                                            ->getUploadedFileNameForStorageUsing(function (Livewire\TemporaryUploadedFile $file): string {
+                                                return time() . '_' . $file->getClientOriginalName();
+                                            }),
+
             ]);
     }
 
@@ -48,6 +52,7 @@ class FileResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
