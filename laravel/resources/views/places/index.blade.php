@@ -11,10 +11,12 @@
            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex items-center justify-center space-x-4">
+                @can('create')
                 <a href="{{ route('places.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                     + Create
                 </a>
-                </div>
+                @endcan    
+            </div>
                    <table class="table">
                       <thead>
                           <tr>
@@ -46,11 +48,12 @@
                                         <a href="{{ route('places.show', $place->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                                             Mostrar
                                         </a>
-                                        
+                                        @can('update', $place)
                                         <a href="{{ route('places.edit', $place) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
                                             Editar
                                         </a>
-                                        
+                                        @endcan
+                                        @can('delete', $place)
                                         <form action="{{ route('places.destroy', $place) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -58,6 +61,7 @@
                                                 Eliminar
                                             </button>
                                         </form>
+                                        @endcan
                                         <form action="{{ route('places.favorite', $place->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @if ( $place->favoritedByUser )
