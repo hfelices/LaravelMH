@@ -20,14 +20,14 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function (Request $request) {
-    $message = 'Loading welcome page';
-    Log::info($message);
-    $request->session()->flash('info', $message);
-    return view('welcome');
-});
+// Route::get('/', function (Request $request) {
+//     $message = 'Loading welcome page';
+//     Log::info($message);
+//     $request->session()->flash('info', $message);
+//     return view('welcome');
+// });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -39,16 +39,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('mail/test', [MailController::class, 'test']);
-Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
-Route::resource('posts', PostController::class)->middleware(['auth', 'role.any:1,2,3']);
-Route::resource('places', PlaceController::class)->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('files', FileController::class)->middleware(['auth', ]);
+Route::resource('posts', PostController::class)->middleware(['auth', ]);
+Route::resource('places', PlaceController::class)->middleware(['auth', ]);
 
-Route::post('/places/{place}/favorite', [PlaceController::class, 'favorite'])->name('places.favorite')->middleware(['auth', 'role.any:1,2,3']);
-Route::delete('/places/{place}/unfavorite', [PlaceController::class, 'unfavorite'])->name('places.unfavorite')->middleware(['auth', 'role.any:1,2,3']);
+Route::post('/places/{place}/favorite', [PlaceController::class, 'favorite'])->name('places.favorite')->middleware(['auth', ]);
+Route::delete('/places/{place}/unfavorite', [PlaceController::class, 'unfavorite'])->name('places.unfavorite')->middleware(['auth', ]);
 
 
 
-Route::post('/posts/{post}/likes', [PostController::class, 'like'])->name('posts.like')->middleware(['auth', 'role.any:1,2,3']);
-Route::delete('/posts/{post}/likes',[ PostController::class, 'unlike'])->name('posts.unlike')->middleware(['auth', 'role.any:1,2,3']);
+Route::post('/posts/{post}/likes', [PostController::class, 'like'])->name('posts.like')->middleware(['auth', ]);
+Route::delete('/posts/{post}/likes',[ PostController::class, 'unlike'])->name('posts.unlike')->middleware(['auth', ]);
 
 require __DIR__.'/auth.php';

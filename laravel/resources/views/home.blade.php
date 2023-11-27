@@ -1,3 +1,6 @@
 <x-geomir-layout>
-    <h1>Aloha</h1>
+@section('content')
+    @include('partials.nav')
+    @include('geomir.map') 
+@endsection
 </x-geomir-layout>

@@ -5,8 +5,10 @@
         </h2>
 
         <h2>{{ __('Resources') }}</h2>
+        @can('create', App\Models\File::class)
         <a href="{{ url('/files') }}">{{ __('Files') }}</a>
         <br>
+        @endcan
         <a href="{{ url('/posts') }}">{{ __('Posts') }}</a>
         <br>
         <a href="{{ url('/places') }}">{{ __('Places') }}</a>
