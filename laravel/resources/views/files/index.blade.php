@@ -36,10 +36,13 @@
                                             Mostrar
                                         </a>
                                         
+                                        @can('update', $file)
                                         <a href="{{ route('files.edit', $file) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
                                             Editar
                                         </a>
+                                        @endcan
                                         
+                                        @can('delete', $file)
                                         <form action="{{ route('files.destroy', $file) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -47,6 +50,7 @@
                                                 Eliminar
                                             </button>
                                         </form>
+                                        @endcan
                                     </div>
                                 </td>
                           </tr>

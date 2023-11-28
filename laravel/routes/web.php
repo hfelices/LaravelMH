@@ -43,8 +43,7 @@ Route::resource('files', FileController::class)->middleware(['auth', ]);
 Route::resource('posts', PostController::class)->middleware(['auth', ]);
 Route::resource('places', PlaceController::class)->middleware(['auth', ]);
 
-Route::post('/places/{place}/favorite', [PlaceController::class, 'favorite'])->name('places.favorite')->middleware(['auth', ]);
-Route::delete('/places/{place}/unfavorite', [PlaceController::class, 'unfavorite'])->name('places.unfavorite')->middleware(['auth', ]);
+Route::post('/places/{place}/favorite', [PlaceController::class, 'favorite'])->name('places.favorite')->middleware('can:update,place');
 
 
 
