@@ -10,7 +10,7 @@
     </div>
     <div class="flex">
         <div class="w-1/3 mr-2">
-            <p class="text-gray-700 max-w-full break-words">{{ $post->body }}</p>
+            <p class="text-gray-700 max-w-full break-words">{!! $post->body !!}</p>
         </div>
         <div class="w-2/3">
             <img class="w-full mb-4" src='{{ asset("storage/{$post->file->filepath}") }}' alt="File Image" />
@@ -18,6 +18,7 @@
     </div>
     <div class="flex justify-between text-gray-600">
         <p>{{ $post->created_at->diffForHumans() }}</p>
+        @can('create', App\Models\Post::class)
         @if ($likedByUser)
         <form action="{{ route('posts.unlike', $post) }}" method="POST">
             @csrf
@@ -42,14 +43,17 @@
             
         </form>
         @endif
+        @endcan
     </div>
     
 </div>
-<div class="flex items-center justify-center space-x-4 mt-2">    
+<div class="flex items-center justify-center space-x-4 mt-2"> 
+    @can('update',$post) 
     <a href="{{ route('posts.edit', $post) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
         Editar
     </a>
-    
+    @endcan
+    @can('delete',$post)
     <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
         @csrf
         @method('DELETE')
@@ -57,5 +61,6 @@
             Eliminar
         </button>
     </form>
+    @endcan
 </div>
 </x-app-layout>
