@@ -1,5 +1,27 @@
 {
     "File successfully saved": "Fitxer desat correctament",
-    "ERROR uploading file": "ERROR pujant el fitxer"
+    "ERROR uploading file": "ERROR pujant el fitxer",
+    "Place successfully created": "Lloc creat correctament",
+    "Place successfully changed": "Lloc cambiat correctament",
+    "Name": "Nom",
+    "Description": "Descripció",
+    "File": "Arxiu",
+    "Latitude": "Latitud",
+    "Longitude": "Longitud",
+    "Author ID": "ID autor",
+    "Created": "Creat",
+    "Updated": "Actualitzat",
+    "View": "Veure",
+    "Update": "Actualitzar",
+    "Delete": "Elimina",
+    "Create": "Crear",
+    "Return": "Torna",
+    "Reset": "Reiniciar",
+    "Filepath": "Ruta",
+    "Filesize": "Tamany",
+    "Edit": "Editar",
+    "Search": "Buscar",
+    "Search in the place body": "Buscar en el cos de lloc"
+
 }
  

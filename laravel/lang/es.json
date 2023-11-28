@@ -1,5 +1,26 @@
 {
     "File successfully saved": "Fichero guardado correctamente",
-    "ERROR uploading file": "ERROR subiendo el archivo"
+    "ERROR uploading file": "ERROR subiendo el archivo",
+    "Place successfully created": "Lugar creado correctamente",
+    "Place successfully changed": "Lugar cambiado correctamente",
+    "Name": "Nombre",
+    "Description": "Descripción",
+    "File": "Archivo",
+    "Latitude": "Latitud",
+    "Longitude": "Longitud",
+    "Author ID": "ID autor",
+    "Created": "Creado",
+    "Updated": "Actualizado",
+    "View": "Ver",
+    "Update": "Actualizar",
+    "Delete": "Eliminar",
+    "Create": "Crear",
+    "Return": "Volver",
+    "Reset": "Reiniciar",
+    "Edit": "Editar",
+    "Filepath": "Ruta",
+    "Filesize": "Tamaño",
+    "Search": "Buscar",
+    "Search in the place body": "Buscar en el cuerpo del lugar"
 }
  

@@ -17,10 +17,10 @@
                        <thead>
                             <tr>
                               <td scope="col">ID</td>
-                              <td scope="col">Filepath</td>
-                              <td scope="col">Filesize</td>
-                              <td scope="col">Created</td>
-                              <td scope="col">Updated</td>
+                              <td scope="col">{{ __('Filepath') }}</td>
+                              <td scope="col">{{ __('Filesize') }}</td>
+                              <td scope="col">{{ __('Created') }}</td>
+                              <td scope="col">{{ __('Updated') }}</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,12 +34,12 @@
                                 <td>
                                     <div class="flex items-center justify-center space-x-4">
                                         <a href="{{ route('files.show', $file->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                                            Mostrar
+                                        {{ __('View') }}
                                         </a>
                                         
                                         @can('update', $file)
                                         <a href="{{ route('files.edit', $file) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
-                                            Editar
+                                        {{ __('Edit') }}
                                         </a>
                                         @endcan
                                         
@@ -48,7 +48,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-                                                Eliminar
+                                            {{ __('Delete') }}
                                             </button>
                                         </form>
                                         @endcan
