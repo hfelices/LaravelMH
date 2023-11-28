@@ -3,6 +3,8 @@
     "ERROR uploading file": "ERROR subiendo el archivo",
     "Place successfully created": "Lugar creado correctamente",
     "Place successfully changed": "Lugar cambiado correctamente",
+    "File successfully eliminated": "Archivo eliminado exitosamente",
+    "Body":"Contenido",
     "Name": "Nombre",
     "Description": "Descripción",
     "File": "Archivo",
@@ -18,9 +20,13 @@
     "Return": "Volver",
     "Reset": "Reiniciar",
     "Edit": "Editar",
+    "Reset Values":"Reestablecer Campos",
     "Filepath": "Ruta",
     "Filesize": "Tamaño",
     "Search": "Buscar",
-    "Search in the place body": "Buscar en el cuerpo del lugar"
+    "Search in the place body": "Buscar en el cuerpo del lugar",
+    "New":"Nuevo",
+    "Search in the body of the post":"Buscar en el cuerpo del post"
 }
+
  
