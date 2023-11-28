@@ -6,9 +6,15 @@ use App\Models\Post;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -256,6 +262,7 @@ class PostController extends Controller
 
     public function like(Request $request, Post $post)
     {
+        $this->authorize('create', $post);
         $like = Like::create([
             'user_id' => $request->user()->id,
             'post_id' => $post->id,
@@ -268,6 +275,7 @@ class PostController extends Controller
 
     public function unlike(Post $post)
     {
+        $this->authorize('create', $post);
         $user_id = Auth::user()->id;
         $like = Like::where('post_id', $post->id)
                     ->where('user_id', $user_id)
