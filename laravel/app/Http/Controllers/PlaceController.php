@@ -24,7 +24,7 @@ class PlaceController extends Controller
    
             // Realizar la búsqueda en la base de datos
             $places = Place::withCount('favorited')
-            ->where('body', 'like', "%$searchTerm%")
+            ->where('description', 'like', "%$searchTerm%")
             ->paginate(5);
             foreach ($places->items() as $place) {
                 $favorited = Favorite::where('place_id', $place->id)
