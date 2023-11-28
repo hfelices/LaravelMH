@@ -50,7 +50,7 @@
 <div class="flex items-center justify-center space-x-4 mt-2"> 
     @can('update',$post) 
     <a href="{{ route('posts.edit', $post) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
-        Editar
+        {{__('Edit')}}
     </a>
     @endcan
     @can('delete',$post)
@@ -58,7 +58,7 @@
         @csrf
         @method('DELETE')
         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-            Eliminar
+            {{__('Delete')}}
         </button>
     </form>
     @endcan

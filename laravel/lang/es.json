@@ -1,5 +1,20 @@
 {
-    "File successfully saved": "Fichero guardado correctamente",
-    "ERROR uploading file": "ERROR subiendo el archivo"
+    "File successfully saved": "Archivo guardado exitosamente",
+    "ERROR uploading file": "ERROR al subir el archivo",
+    "File successfully eliminated": "Archivo eliminado exitosamente",
+    "Body":"Contenido",
+    "File": "Archivo",
+    "Latitude": "Latitud",
+    "Longitude":"Longitud",
+    "Create": "Crear",
+    "Reset":"Vaciar campos",
+    "Update":"Actualizar",
+    "Reset Values":"Reestablecer Campos",
+    "Search": "Buscar",
+    "New":"Nuevo",
+    "Search in the body of the post":"Buscar en el cuerpo del post",
+    "Edit":"Editar",
+    "Delete":"Eliminar"
 }
+
  
