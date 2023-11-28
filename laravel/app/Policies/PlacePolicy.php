@@ -29,11 +29,8 @@ class PlacePolicy
      */
     public function create(User $user): bool
     {
-        if ($user->role_id==1 || $user->role_id==2){
-            return true;
-        }        else{
-            return false;
-        }
+        return $user->role_id == 1;
+
     }
 
     /**
@@ -41,7 +38,7 @@ class PlacePolicy
      */
     public function update(User $user, Place $place): bool
     {
-        return $user->role_id == 1;
+        return ($user->id==$place->author_id || $user->role_id==2);
     }
 
     /**
@@ -49,7 +46,7 @@ class PlacePolicy
      */
     public function delete(User $user, Place $place): bool
     {
-        return $user->role_id == 1;
+        return $user->id == $place->author_id;
     }
 
     /**

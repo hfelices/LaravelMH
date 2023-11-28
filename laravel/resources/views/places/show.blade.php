@@ -13,7 +13,7 @@
             <p class="text-center">Created at: {{$place['created_at']}}</p>
             <p class="text-center">Last time updated: {{$place['updated_at']}}</p>
             <div class="flex items-center justify-center mt-2 space-x-4">
-                @can('update', $place)
+                @can('update',$place)
                 <a href="{{ route('places.edit', $place->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
                     Editar
                 </a>
