@@ -62,6 +62,7 @@
                                             </button>
                                         </form>
                                         @endcan
+                                        @can('create',App\Models\Place::class)
                                         <form action="{{ route('places.favorite', $place->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @if ( $place->favoritedByUser )
@@ -74,6 +75,7 @@
                                                 </button>
                                             @endif
                                         </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
