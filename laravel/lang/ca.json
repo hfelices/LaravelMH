@@ -1,6 +1,19 @@
 {
-    "File successfully saved": "Fitxer desat correctament",
-    "ERROR uploading file": "ERROR pujant el fitxer",
-    "File successfully eliminated":"Fitxer eliminat correctament"
+    "File successfully saved": "Fitxer guardat correctament",
+    "ERROR uploading file": "ERROR en pujar el fitxer",
+    "File successfully eliminated": "Fitxer eliminat correctament",
+    "Body": "Contingut",
+    "File": "Fitxer",
+    "Latitude": "Latitud",
+    "Longitude": "Longitud",
+    "Create": "Crear",
+    "Reset": "Buidar camps",
+    "Update": "Actualitzar",
+    "Reset Values": "Restablir valors",
+    "Search": "Cercar",
+    "New": "Nou",
+    "Search in the body of the post": "Cercar en el cos de la publicació",
+    "Edit": "Editar",
+    "Delete": "Eliminar"
 }
  
