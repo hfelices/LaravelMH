@@ -13,7 +13,7 @@
                 <div class="flex items-center justify-center space-x-4">
                 @can('create',App\Models\Place::class)
                 <a href="{{ route('places.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                    + Create
+                    + {{ __('Create') }}
                 </a>
                 @endcan    
             </div>
@@ -21,14 +21,14 @@
                       <thead>
                           <tr>
                               <td scope="col">ID</td>
-                              <td scope="col">Name</td>
-                              <td scope="col">Description</td>
-                              <td scope="col">File ID/File image</td>
-                              <td scope="col">Latitude</td>
-                              <td scope="col">Longitude</td>
-                              <td scope="col">Auth ID</td>
-                              <td scope="col">Created</td>
-                              <td scope="col">Updated</td>
+                              <td scope="col">{{ __('Name') }}</td>
+                              <td scope="col">{{ __('Description') }}</td>
+                              <td scope="col">{{ __('File') }}</td>
+                              <td scope="col">{{ __('Latitude') }}</td>
+                              <td scope="col">{{ __('Longitude') }}</td>
+                              <td scope="col">{{ __('Author ID') }}</td>
+                              <td scope="col">{{ __('Created') }}</td>
+                              <td scope="col">{{ __('Updated') }}</td>
                           </tr>
                       </thead>
                       <tbody>
@@ -46,11 +46,11 @@
                                 <td>
                                     <div class="flex items-center justify-center space-x-4">
                                         <a href="{{ route('places.show', $place->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                                            Mostrar
+                                        {{ __('View') }}
                                         </a>
                                         @can('update', $place)
                                         <a href="{{ route('places.edit', $place) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
-                                            Editar
+                                        {{ __('Edit') }}
                                         </a>
                                         @endcan
                                         @can('delete', $place)
@@ -58,7 +58,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
-                                                Eliminar
+                                            {{ __('Delete') }}
                                             </button>
                                         </form>
                                         @endcan
@@ -85,8 +85,8 @@
                             <form action="{{ route('places.index') }}" method="GET" class="mb-4">
                             @csrf
                                 <div class="flex">
-                                    <input type="text" name="search" placeholder="Buscar en el cuerpo del post" class="form-input flex-grow mr-2" />
-                                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Buscar</button>
+                                    <input type="text" name="search" placeholder="{{ __('Search in the place body') }}" class="form-input flex-grow mr-2" />
+                                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">{{ __('Search') }}</button>
                                 </div>
                             </form>
                             <div class="mt-4">

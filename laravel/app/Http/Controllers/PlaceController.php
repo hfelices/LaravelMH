@@ -107,17 +107,17 @@ class PlaceController extends Controller
                 \Log::debug("DB storage OK");
                 // Patró PRG amb missatge d'èxit
                 return redirect()->route('places.show', $place)
-                    ->with('success', 'File successfully saved');
+                    ->with('success', __('Place successfully created'));
             } else {
                 return redirect()->route("places.create")
-                    ->with('error', 'ERROR uploading file');
+                    ->with('error', __('ERROR uploading file'));
             }
            
        } else {
            \Log::debug("Disk storage FAILS");
            // Patró PRG amb missatge d'error
            return redirect()->route("places.create")
-               ->with('error', 'ERROR uploading file');
+               ->with('error', __('ERROR uploading file'));
        }
    }
 
@@ -196,10 +196,10 @@ class PlaceController extends Controller
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('places.show', $place)
-                ->with('success', 'File successfully saved');
+                ->with('success', __('Place successfully changed'));
         } else {
             return redirect()->route("places.edit", $place)
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('ERROR uploading file'));
         }
         }
     }else {
@@ -217,15 +217,15 @@ class PlaceController extends Controller
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('places.show', $place)
-                ->with('success', 'File successfully saved');
+                ->with('success', __('Place successfully changed'));
         } else {
             return redirect()->route("places.edit", $place)
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('ERROR uploading file'));
         }
         \Log::debug("Disk storage FAILS");
         // Patró PRG amb missatge d'error
         return redirect()->route("places.edit", $place)
-            ->with('error', 'ERROR uploading file');
+            ->with('error', __('ERROR uploading file'));
     }
 
 

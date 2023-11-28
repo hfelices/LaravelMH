@@ -1,20 +1,28 @@
 {
-    "File successfully saved": "Archivo guardado exitosamente",
-    "ERROR uploading file": "ERROR al subir el archivo",
+    "File successfully saved": "Fichero guardado correctamente",
+    "ERROR uploading file": "ERROR subiendo el archivo",
+    "Place successfully created": "Lugar creado correctamente",
+    "Place successfully changed": "Lugar cambiado correctamente",
     "File successfully eliminated": "Archivo eliminado exitosamente",
     "Body":"Contenido",
+    "Name": "Nombre",
+    "Description": "Descripción",
     "File": "Archivo",
     "Latitude": "Latitud",
-    "Longitude":"Longitud",
+    "Longitude": "Longitud",
+    "Author ID": "ID autor",
+    "Created": "Creado",
+    "Updated": "Actualizado",
+    "View": "Ver",
+    "Update": "Actualizar",
+    "Delete": "Eliminar",
     "Create": "Crear",
     "Reset":"Vaciar campos",
-    "Update":"Actualizar",
-    "Reset Values":"Reestablecer Valores",
+    "Reset Values":"Reestablecer Campos",
     "Search": "Buscar",
+    "Search in the place body": "Buscar en el cuerpo del lugar",
     "New":"Nuevo",
-    "Search in the body of the post":"Buscar en el cuerpo del post",
-    "Edit":"Editar",
-    "Delete":"Eliminar"
+    "Search in the body of the post":"Buscar en el cuerpo del post"
 }
 
  
