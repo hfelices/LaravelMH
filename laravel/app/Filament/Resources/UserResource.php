@@ -23,19 +23,19 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('role_id')
+                Forms\Components\Select::make('role_id')->translateLabel()
                                         ->relationship('role', 'name')
                                         ->required(),
 
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name')->translateLabel()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                Forms\Components\TextInput::make('email')->translateLabel()
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
+                Forms\Components\DateTimePicker::make('email_verified_at')->translateLabel(),
+                Forms\Components\TextInput::make('password')->translateLabel()
                     ->password()
                     ->required()
                     ->maxLength(255),
@@ -46,14 +46,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('role_id'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('email_verified_at')
+                Tables\Columns\TextColumn::make('role_id')->translateLabel(),
+                Tables\Columns\TextColumn::make('name')->translateLabel(),
+                Tables\Columns\TextColumn::make('email')->translateLabel(),
+                Tables\Columns\TextColumn::make('email_verified_at')->translateLabel()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')->translateLabel()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                Tables\Columns\TextColumn::make('updated_at')->translateLabel()
                     ->dateTime(),
             ])
             ->filters([

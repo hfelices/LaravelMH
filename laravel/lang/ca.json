@@ -20,9 +20,13 @@
     "Reset": "Reiniciar",
     "Filepath": "Ruta",
     "Filesize": "Tamany",
+    "Body":"Contingut",
     "Edit": "Editar",
     "Search": "Buscar",
-    "Search in the place body": "Buscar en el cos de lloc"
+    "Search in the place body": "Buscar en el cos de lloc",
+    "Created at" : "Creat",
+    "Updated at" : "Actualitzat",
+    "Author id": "Id Autor"
 
 }
  

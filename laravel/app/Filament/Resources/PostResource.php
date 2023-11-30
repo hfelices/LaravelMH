@@ -25,11 +25,11 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Fieldset::make('File')
+                Forms\Components\Fieldset::make('File')->translateLabel()
                 ->relationship('file')
                 ->saveRelationshipsWhenHidden()
                 ->schema([
-                    Forms\Components\FileUpload::make('file_id')
+                    Forms\Components\FileUpload::make('file_id')->translateLabel()
                     ->required()
                     ->image()
                     ->maxSize(2048)
@@ -38,15 +38,15 @@ class PostResource extends Resource
                         return time() . '_' . $file->getClientOriginalName();
                 }),
                 ]),
-                Forms\Components\Fieldset::make('Post')
+                Forms\Components\Fieldset::make('Post')->translateLabel()
                     ->schema([
                         Forms\Components\Hidden::make('file_id'),
-                        Forms\Components\Select::make('author_id')
+                        Forms\Components\Select::make('author_id')->translateLabel()
                                                 ->relationship('user', 'name')
                                                 ->searchable()      
                                                 ->default(\Auth::user()->id)
                                                 ->required(),
-                        Forms\Components\RichEditor::make('body')
+                        Forms\Components\RichEditor::make('body')->translateLabel()
                                                     ->toolbarButtons([
                                                         'blockquote',
                                                         'bold',
@@ -63,10 +63,10 @@ class PostResource extends Resource
                                                         'undo',
                                                     ])->required()
                                                     ->maxLength(255),
-                        Forms\Components\TextInput::make('latitude')
+                        Forms\Components\TextInput::make('latitude')->translateLabel()
                                                     ->numeric()
                                                     ->required(),
-                        Forms\Components\TextInput::make('longitude')
+                        Forms\Components\TextInput::make('longitude')->translateLabel()
                                                     ->numeric()
                                                     ->required(),
                                                 ]),
@@ -78,14 +78,14 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('file.filepath')->square()->width(100)->height(100),
-                Tables\Columns\TextColumn::make('author_id'),
-                Tables\Columns\TextColumn::make('body'),
-                Tables\Columns\TextColumn::make('latitude'),
-                Tables\Columns\TextColumn::make('longitude'),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\ImageColumn::make('file.filepath')->square()->width(100)->height(100)->translateLabel(),
+                Tables\Columns\TextColumn::make('author_id')->translateLabel(),
+                Tables\Columns\TextColumn::make('body')->translateLabel(),
+                Tables\Columns\TextColumn::make('latitude')->translateLabel(),
+                Tables\Columns\TextColumn::make('longitude')->translateLabel(),
+                Tables\Columns\TextColumn::make('created_at')->translateLabel()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                Tables\Columns\TextColumn::make('updated_at')->translateLabel()
                     ->dateTime(),
             ])
             ->filters([

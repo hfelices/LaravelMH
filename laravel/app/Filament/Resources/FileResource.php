@@ -29,6 +29,7 @@ class FileResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('filepath')
+                                            ->translateLabel()
                                             ->required()
                                             ->image()
                                             ->maxSize(2048)
@@ -45,11 +46,11 @@ class FileResource extends Resource
         
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('filepath')->square()->width(100)->height(100),
-                Tables\Columns\TextColumn::make('filesize'),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\ImageColumn::make('filepath')->square()->width(100)->height(100)->translateLabel(),
+                Tables\Columns\TextColumn::make('filesize')->translateLabel(),
+                Tables\Columns\TextColumn::make('created_at')->translateLabel()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                Tables\Columns\TextColumn::make('updated_at')->translateLabel()
                     ->dateTime(),
             ])
             ->filters([

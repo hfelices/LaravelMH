@@ -30,6 +30,7 @@ class PlaceResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Fieldset::make('File')
+                ->translateLabel()
                 ->relationship('file')
                 ->saveRelationshipsWhenHidden()
                 ->schema([
@@ -43,9 +44,11 @@ class PlaceResource extends Resource
                     }),
                 ]),
                 Forms\Components\Fieldset::make('Place')
+                ->translateLabel()
                 ->schema([
                 Forms\Components\Hidden::make('file_id'),
                 Forms\Components\Select::make('author_id')
+                ->translateLabel()
                 ->label('Author')
                 ->relationship('user', 'name')
                 ->searchable()
@@ -54,9 +57,11 @@ class PlaceResource extends Resource
                     // ->relationship('user', 'name')
                     // ->required(),
                 Forms\Components\TextInput::make('name')
+                    ->translateLabel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\RichEditor::make('description')
+                ->translateLabel()
                     ->toolbarButtons([
                         'bold',
                         'bulletList',
@@ -71,8 +76,10 @@ class PlaceResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('latitude')
+                ->translateLabel()
                     ->required(),
                 Forms\Components\TextInput::make('longitude')
+                ->translateLabel()
                     ->required(),
                     ])
             ]);
@@ -84,15 +91,15 @@ class PlaceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('file_id'),
-                Tables\Columns\TextColumn::make('author_id'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('latitude'),
-                Tables\Columns\TextColumn::make('longitude'),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('file_id')->translateLabel(),
+                Tables\Columns\TextColumn::make('author_id')->translateLabel(),
+                Tables\Columns\TextColumn::make('name')->translateLabel(),
+                Tables\Columns\TextColumn::make('description')->translateLabel(),
+                Tables\Columns\TextColumn::make('latitude')->translateLabel(),
+                Tables\Columns\TextColumn::make('longitude')->translateLabel(),
+                Tables\Columns\TextColumn::make('created_at')->translateLabel()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
+                Tables\Columns\TextColumn::make('updated_at')->translateLabel()
                     ->dateTime(),
             ])
             ->filters([
