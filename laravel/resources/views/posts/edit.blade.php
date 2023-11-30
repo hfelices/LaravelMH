@@ -1,4 +1,6 @@
 <x-app-layout>
+@include('partials.flash')
+
 <a href="{{ route('posts.show', $post) }}"><button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-700 active:bg-blue-800 mt-2 ml-12">Volver</button></a>           
 
 <form method="post" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data" class="max-w-md mx-auto">

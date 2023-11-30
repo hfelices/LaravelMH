@@ -5,6 +5,8 @@
         </h2>
     </x-slot>
 
+    @include('partials.flash')
+
     <div class="py-12">
     @can('create', App\Models\Post::class)
     <a href="{{ route('posts.create') }}"><button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-700 active:bg-blue-800 mt-2 ml-12">{{__('New')}} Post +</button></a>           

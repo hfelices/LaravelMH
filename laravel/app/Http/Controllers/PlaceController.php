@@ -34,8 +34,6 @@ class PlaceController extends Controller
                 $place->favoritedByUser = $favoritedByUser;
             }
             return view("places.index", compact('places'));
-           
-            return view('places.index', compact('places'));
         } else {
             $places =  Place::withCount('favorited')
                             ->paginate(5);

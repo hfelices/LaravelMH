@@ -1,4 +1,6 @@
 <x-app-layout>
+@include('partials.flash')
+
     <div class="min-h-screen flex items-center justify-center">
             <div class="w-1/5">
             @if(session('success'))

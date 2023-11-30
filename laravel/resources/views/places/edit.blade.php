@@ -1,4 +1,6 @@
 <x-app-layout>
+@include('partials.flash')
+
     <form method="post" action="{{ route('places.update', $place)  }}" enctype="multipart/form-data" class="max-w-md mx-auto">
         @csrf
         @method('PUT')

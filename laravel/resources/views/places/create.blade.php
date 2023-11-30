@@ -9,6 +9,8 @@
     </div>
     @endif
 
+    @include('partials.flash')
+
     <form method="post" action="{{ route('places.store') }}" enctype="multipart/form-data" class="max-w-md mx-auto">
         @csrf
         @if(session('fails'))
