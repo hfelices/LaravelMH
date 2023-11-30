@@ -29,7 +29,8 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role_id == 1;
+        // return $user->role_id == 1;
+        return true;
     }
 
     /**

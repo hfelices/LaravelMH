@@ -54,6 +54,10 @@ class PlaceResource extends Resource
                 ->searchable()
                 ->default(\Auth::user()->id)
                 ->required(),
+                Forms\Components\Select::make('visibility_id')->translateLabel()
+                        ->relationship('visibilities', 'name')
+                        ->searchable()      
+                        ->required(),
                     // ->relationship('user', 'name')
                     // ->required(),
                 Forms\Components\TextInput::make('name')

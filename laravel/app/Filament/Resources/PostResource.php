@@ -46,6 +46,10 @@ class PostResource extends Resource
                                                 ->searchable()      
                                                 ->default(\Auth::user()->id)
                                                 ->required(),
+                        Forms\Components\Select::make('visibility_id')->translateLabel()
+                        ->relationship('visibilities', 'name')
+                        ->searchable()      
+                        ->required(),                        
                         Forms\Components\RichEditor::make('body')->translateLabel()
                                                     ->toolbarButtons([
                                                         'blockquote',

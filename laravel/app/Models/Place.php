@@ -15,7 +15,7 @@ class Place extends Model
         'latitude',
         'longitude',
         // 'category_id',
-        // 'visibility_id',
+        'visibility_id',
         'author_id'
     ];
     public function file()
@@ -39,6 +39,9 @@ class Place extends Model
         return $this->belongsToMany(User::class, 'favorites');
     }
 
-
+    public function visibilities()
+    {
+    return $this->belongsTo(visibility::class);
+    }
 }
 
