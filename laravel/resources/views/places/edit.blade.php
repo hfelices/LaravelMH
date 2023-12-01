@@ -1,17 +1,19 @@
 <x-app-layout>
 @include('partials.flash')
 
-    <form method="post" action="{{ route('places.update', $place)  }}" enctype="multipart/form-data" class="max-w-md mx-auto">
+    <form id="edit-place-form" method="post" action="{{ route('places.update', $place)  }}" enctype="multipart/form-data" class="max-w-md mx-auto">
         @csrf
         @method('PUT')
         <img class="w-3/6" src='{{ asset("storage/{$place->file->filepath}") }}'  alt="File Image">
         <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Name') }}:</label>
             <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="name" value="{{$place->name}}" required/>
+            <div id=nameError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Description') }}:</label>
             <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="description" value="{{$place->description}}" required/>
+            <div id=descriptionError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="upload" class="block text-gray-700 text-sm font-bold mb-2">{{ __('File') }}:</label>
@@ -20,10 +22,12 @@
         <div class="mb-4">
             <label for="latitude" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Latitude') }}:</label>
             <input type="number" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="latitude" value="{{$place->latitude}}" required/>
+            <div id=latitudeError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="longitude" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Longitude') }}:</label>
             <input type="number" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="longitude" value="{{$place->longitude}}" required/>
+            <div id=longitudeError class="text-red-500"> </div>
         </div>
         <div class="flex space-x-4">
             @can('update', $place)
