@@ -18,11 +18,12 @@
         @if(session('fails'))
         <div class="alert alert-fails">
            {{ session('fails') }}
-        </div>
+        </div>
         @endif
         <div class="mb-4">
             <label for="upload" class="block text-gray-700 text-sm font-bold mb-2">{{ __('File') }}:</label>
             <input type="file" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="upload"/>
+            <div id=uploadError class="text-red-500"> </div>
         </div>
         @can('create',App\Models\File::class)
         <div class="flex space-x-4">

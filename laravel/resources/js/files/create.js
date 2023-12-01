@@ -4,6 +4,13 @@ import Validator from '../validator'
 // Submit form ONLY when validation is OK
 const form = document.getElementById("create-file-form")
 
+function mostrarError(mensaje, elemento) {
+    // Obtener el elemento de mensaje de error
+    let mensajeError = document.getElementById(elemento);
+
+    // Mostrar el mensaje de error
+    mensajeError.innerHTML = mensaje;
+}
 
 if (form) {
    form.addEventListener("submit", function( event ) {
@@ -30,7 +37,7 @@ if (form) {
                   for(let inputName in errors) {          
                       let error = errors[inputName]
                       console.log("[ERROR] " + error)
-                      // [...]
+                      mostrarError(error, "uploadError")
                   }
                   // Avoid submit
                   event.preventDefault()
