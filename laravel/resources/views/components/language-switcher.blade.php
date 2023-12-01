@@ -12,10 +12,11 @@
             <x-dropdown-link :href="route('language', $locale)">
                 {{ $localeName }} ({{ $locale }})
             </x-dropdown-link>
+            <script>
+                const currentLocale = {{ Js::from($currentLocale) }};
+            </script>
         @endif
     @endforeach
     </x-slot>
-    <script>
-        const currentLocale = {{ Js::from($currentLocale) }};
-    </script>
+    
 </x-dropdown>
