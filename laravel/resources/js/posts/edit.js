@@ -22,6 +22,7 @@ if (form) {
         "latitude": document.getElementsByName("latitude")[0].value,
         "longitude": document.getElementsByName("longitude")[0].value,
         }
+        
         let rules = {
             "body": "required",
             "latitude": "required",
