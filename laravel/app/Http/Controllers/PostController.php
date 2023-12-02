@@ -38,7 +38,7 @@ class PostController extends Controller
 
             
 
-            return view('posts.index', compact('posts'));
+            return view('home', compact('posts'));
         } else {
 
             $posts =  Post::withCount('liked')
@@ -52,7 +52,7 @@ class PostController extends Controller
                 $post->likedByUser = $likedByUser;
             }
              
-            return view("posts.index", compact('posts'));
+            return view("home", compact('posts'));
         }
     }
  

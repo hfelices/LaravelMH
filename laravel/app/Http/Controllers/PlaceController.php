@@ -33,7 +33,7 @@ class PlaceController extends Controller
                 $favoritedByUser = ($favorited->count() > 0) ? true : false;
                 $place->favoritedByUser = $favoritedByUser;
             }
-            return view("places.index", compact('places'));
+            return view('home', compact('places'));
         } else {
             $places =  Place::withCount('favorited')
                             ->paginate(5);
@@ -45,7 +45,7 @@ class PlaceController extends Controller
                 $favoritedByUser = ($favorited->count() > 0) ? true : false;
                 $place->favoritedByUser = $favoritedByUser;
             }
-            return view("places.index", compact('places'));
+            return view('home', compact('places'));
         }
     }
  
