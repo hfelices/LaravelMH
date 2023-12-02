@@ -3,14 +3,16 @@
 @section('content')
     
 <div class="flex h-screen overflow-hidden">
-    <div class="w-7/12 overflow-y-auto z-10 noScrollbar">  
+    <div class="scrollArea md:w-7/12 w-full overflow-y-auto z-10 noScrollbar">
         @if(isset($posts))
             @include('geomir.posts')
         @elseif(isset($places))
             @include('geomir.places')
         @endif
     </div>
-    <div class="w-5/12 relative">
+
+    <!-- Div en dispositivos grandes y pequeños -->
+    <div class="md:w-5/12 md:block hidden relative">
         <img class="w-full h-full object-cover z-[-10]" src="{{ asset('img/barcelona_centro.jpg') }}" alt="">
     </div>
 </div>

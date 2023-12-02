@@ -3,16 +3,16 @@
     @include('partials.flash')
  
  
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                 <div class="p-6 bg-white border-b border-gray-200">
+    <div class="">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-screen" style="background-image: url('{{ asset('img/fondos/04.jpg') }}'); background-size: cover; background-position: center;">
+            <div class="overflow-hidden shadow-sm sm:rounded-lg transparent ">
+                 <div class="p-6 border-b border-gray-200 transparent">
                  <div class="flex items-center justify-center space-x-4">
-                 @can('create',App\Models\Place::class)
+                 {{-- @can('create',App\Models\Place::class)
                  <a href="{{ route('places.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                      + {{ __('Create') }}
                  </a>
-                 @endcan    
+                 @endcan     --}}
              </div>
                     <table class="table">
                        <thead>
