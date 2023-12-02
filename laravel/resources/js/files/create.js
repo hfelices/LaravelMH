@@ -32,12 +32,11 @@ if (form) {
               } else {
                   // Get error messages
                   let errors = validation.errors.all()
-                  console.log(errors)
+                  //console.log(errors)
                   // Show error messages
                   for(let inputName in errors) {          
-                      let error = errors[inputName]
-                      console.log("[ERROR] " + error)
-                      mostrarError(error, "uploadError")
+                      let error = errors[inputName]                      
+                      mostrarError(error, `${inputName}Error`)
                   }
                   // Avoid submit
                   event.preventDefault()
@@ -46,3 +45,4 @@ if (form) {
           })
        }
        
+      

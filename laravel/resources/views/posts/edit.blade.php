@@ -3,13 +3,14 @@
 
 <a href="{{ route('posts.show', $post) }}"><button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-700 active:bg-blue-800 mt-2 ml-12">Volver</button></a>           
 
-<form method="post" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data" class="max-w-md mx-auto">
+<form id="edit-post-form" method="post" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data" class="max-w-md mx-auto">
         @csrf
         @method('PUT')
         <div class="mb-4">
         <label for="body" class="block text-gray-700 text-sm font-bold mb-2">{{__('Body')}}:</label>
         <textarea name="body"  id="body" rows="3" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">{{ $post->body }}</textarea>
-        </div>
+        <div id=bodyError class="text-red-500"> </div>    
+    </div>
 
     <!-- Campo File -->
     <div class="mb-4">
@@ -23,12 +24,14 @@
     <div class="mb-4">
         <label for="latitude" class="block text-gray-700 text-sm font-bold mb-2">{{__('Latitude')}}:</label>
         <input type="number" name="latitude" value="{{ $post->latitude}}" id="latitude" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+        <div id=latitudeError class="text-red-500"> </div>
     </div>
 
     <!-- Campo Longitude -->
     <div class="mb-4">
         <label for="longitude" class="block text-gray-700 text-sm font-bold mb-2">{{__('Longitude')}}:</label>
         <input type="number" name="longitude" value="{{ $post->longitude}}" id="longitude" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+        <div id=longitudeError class="text-red-500"> </div>
     </div>
 
     <!-- Botones de acción -->

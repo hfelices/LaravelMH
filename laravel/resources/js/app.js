@@ -4,6 +4,8 @@ import './files/create';
 import './places/create';
 import './places/edit';
 
+import './posts/create';
+import './posts/edit';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
