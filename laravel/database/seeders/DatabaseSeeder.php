@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             VisibilitySeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            FileSeeder::class,
+            PlaceSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }
