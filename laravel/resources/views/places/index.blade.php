@@ -56,7 +56,7 @@
                                         </a>
                                         @endcan
                                         @can('delete', $place)
-                                        <form action="{{ route('places.destroy', $place) }}" method="POST" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
+                                        <form action="{{ route('places.destroy', $place) }}" method="place" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
@@ -65,7 +65,7 @@
                                         </form>
                                         @endcan
                                         @can('create',App\Models\Place::class)
-                                        <form action="{{ route('places.favorite', $place->id) }}" method="POST" style="display: inline;">
+                                        <form action="{{ route('places.favorite', $place->id) }}" method="place" style="display: inline;">
                                             @csrf
                                             @if ( $place->favoritedByUser )
                                                 <button type="submit" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
