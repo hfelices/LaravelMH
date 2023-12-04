@@ -3,6 +3,7 @@
 @section('content')
     
 <div class="flex h-screen overflow-hidden">
+    
     <div class="scrollArea md:w-7/12 w-full overflow-y-auto z-10 noScrollbar">
         @if(isset($posts))
             @include('geomir.posts')
