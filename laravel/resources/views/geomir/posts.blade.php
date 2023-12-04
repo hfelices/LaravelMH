@@ -21,7 +21,7 @@
                 </form>
                     @foreach ($posts as $post)
                         <a href="{{ route('posts.show', $post->id) }}">
-                            <div class=" bg-white mx-auto w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/2 border border-gray-300 rounded-lg p-4 mb-4">
+                            <div class=" bg-white mx-auto w-3/4  border border-gray-300 rounded-lg p-4 mb-4">
                                 <div class="flex items-center mb-2">
                                     <img class="w-10 h-10 rounded-full mr-4" src='{{ asset("storage/{$post->file->filepath}") }}' alt="File Image" />
                                     <div>
