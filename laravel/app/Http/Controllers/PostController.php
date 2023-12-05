@@ -26,7 +26,7 @@ class PostController extends Controller
             // Realizar la búsqueda en la base de datos
             $posts = Post::withCount('liked')
                             ->where('body', 'like', "%$searchTerm%")
-                            ->paginate(5);
+                            ->paginate(10);
 
             foreach ($posts->items() as $post) {
                 $liked = Like::where('post_id', $post->id)
@@ -42,7 +42,7 @@ class PostController extends Controller
         } else {
 
             $posts =  Post::withCount('liked')
-                            ->paginate(5);
+                            ->paginate(10);
             
             foreach ($posts->items() as $post) {
                 $liked = Like::where('post_id', $post->id)

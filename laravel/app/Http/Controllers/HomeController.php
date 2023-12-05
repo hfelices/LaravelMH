@@ -10,5 +10,10 @@ class HomeController extends Controller
     {
         return redirect()->route('posts.index');
     }
+
+    public function aboutus()
+    {
+        return view('geomir.aboutus');
+    }
  
 }
