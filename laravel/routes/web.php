@@ -28,6 +28,7 @@ use App\Http\Controllers\LanguageController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about_mark', [HomeController::class, 'about_mark'])->name('about_mark');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -4,7 +4,7 @@
         <li class="flex"><a href="{{ url('/posts/create') }}"><img class="{{ (request()->path() == 'posts') ? '' : 'hidden md:block' }} w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/post.jpg')}}" alt=""></a></li>
         <li class="flex"><a href="{{ url('/places/create') }}"><img class="{{ (request()->path() == 'places') ? '' : 'hidden md:block' }} w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/map.jpg')}}" alt=""></a></li>
         <li class="flex"><a href="{{ url('/profile') }}"><img class="w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/user.jpg')}}" alt=""></a></li>
-        <li class="flex"><a href=""><img class="w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/compass.jpg')}}" alt=""></a></li>
+        <li class="flex"><a href="{{ url('/about_mark') }}"><img class="w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/compass.jpg')}}" alt=""></a></li>
         <li class="flex"><a href=""><img class="w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/fav.jpg')}}" alt=""></a></li>
         <li class="flex"><a href=""><img class="w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/group.jpg')}}" alt=""></a></li>
         <li class="flex"><a href=""><img class="w-14 h-14 rounded-full md:w-16 md:h-16" src="{{asset('img/message.jpg')}}" alt=""></a></li>

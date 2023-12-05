@@ -10,5 +10,9 @@ class HomeController extends Controller
     {
         return redirect()->route('posts.index');
     }
+    public function about_mark()
+    {
+        return view('geomir.about_mark');
+    }
  
 }
