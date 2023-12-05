@@ -62,14 +62,15 @@
     }
 </style>
 
-<div class="relative h-screen">
+<div class="relative h-screen bg-black">
   
   <canvas id="matrix" class="h-full w-full invisible" style="background: #000; display: block;">
   </canvas> 
 
   <div class="flex md:flex-row flex-col items-center mx-20 justify-around h-full absolute  inset-0">
     
-    <div class="max-w-xl bg-white p-4 rounded-md shadow-md imagen imagen-hector" id="imagen-hector" >
+
+  <div class="max-w-xl bg-white p-4 rounded-md shadow-md imagen imagen-hector" id="imagen-hector" >
       <img  src="https://img.nbc.com/files/images/2013/11/12/dwight-500x500.jpg" alt="Imagen 1" class="mb-4 rounded-md   seria">
       <img  src="https://i.pinimg.com/originals/74/30/bd/7430bd5c400e0ed5613afa2842fda124.gif" alt="Imagen 1" class="mb-4  rounded-md  divertida">
       <h2 class="text-xl font-bold mb-2">Dwight Schrute</h2>
@@ -77,33 +78,30 @@
       <audio id="audio-hector" src='{{ asset("audio/Rick Astley - Never Gonna Give You Up (Official Music Video).mp3")}}'></audio>
     </div>
     
-   
+  <div class="max-w-xl bg-white p-4 rounded-md shadow-md" id="imagen-mark">
+    <div class="imagen imagen-mark">
+      <img  src='{{ asset("img/foto_divertida.jpg") }}' alt="Imagen 1" class="mb-4 rounded-md divertida">
+      <img src='{{ asset("img/foto_seria.jpg") }}' alt="Imagen 2" class="mb-4 rounded-md seria">
+    </div>
+    <h2 class="text-xl font-bold mb-2">Mark López Morales</h2>
+    <p class="text-gray-700">Definitivamente una descripción.</p>
+  </div>
+
+ 
+    <div id="modal-mark">
+      <div id="modal-mark-content">
+        <iframe width="800"height="450"src="https://www.youtube.com/embed/PQ7b6frW_vY?autoplay=1&mute=1"frameborder="0"allowfullscreen></iframe>
+      </div>
+      <audio id="audio-mark"><source src='{{ asset("audio/All Devouring Narwhal  Shadow Phase - Genshin Impact 4.2 OST.mp3")}}'></audio>
+    </div>
     <div id="modal-hector">
       <div id="modal-hector-content">
-        <iframe  class="h-60 w-96" src="https://www.youtube.com/embed/6stlCkUDG_s?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+        <iframe   width="800"height="450" src="https://www.youtube.com/embed/6stlCkUDG_s?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-    <audio id="audio-mark">
-      <source src='{{ asset("audio/All Devouring Narwhal  Shadow Phase - Genshin Impact 4.2 OST.mp3")}}'>
-    </audio>
-    <div class="max-w-xl bg-white p-4 rounded-md shadow-md" id="imagen-mark">
-      <div class="imagen imagen-mark w-1/1">
-        <img  src='{{ asset("img/foto_divertida.jpg") }}' alt="Imagen 1" class="mb-4 rounded-md divertida">
-        <img src='{{ asset("img/foto_seria.jpg") }}' alt="Imagen 2" class="mb-4 rounded-md seria">
-      </div>
-      <h2 class="text-xl font-bold mb-2">Mark López Morales</h2>
-      <p class="text-gray-700 divertida">Definitivamente una descripción.</p>
-    </div>
-    <div id="modal-mark">
-    <div id="modal-mark-content">
-      <iframe
-        width="800"
-        height="450"
-        src="https://www.youtube.com/embed/PQ7b6frW_vY?autoplay=1&mute=1"
-        frameborder="0"
-        allowfullscreen></iframe>
-    </div>
-  </div>
+
+    
+    
 </div>
 
 
@@ -111,6 +109,7 @@
      
     <script>
 
+    
       document.addEventListener("DOMContentLoaded", function () {
     var imagenHector = document.getElementById("imagen-hector");
     var imagenMark = document.getElementById("imagen-mark");
@@ -125,6 +124,7 @@
 
     imagenMark.addEventListener("mouseout", function () {
         audioMark.pause();
+        matrix.classList.add("invisible");
       });
 
     imagenHector.addEventListener("mouseover", function () {
@@ -134,6 +134,7 @@
 
     imagenHector.addEventListener("mouseout", function () {
         audioHector.pause();
+        matrix.classList.add("invisible");
       });
 
 
@@ -180,7 +181,7 @@
 
 
 document.getElementById('imagen-mark').addEventListener('click', function() {
-    document.getElementById('modal-hector').style.display = 'flex';
+    document.getElementById('modal-mark').style.display = 'flex';
   });
 
   

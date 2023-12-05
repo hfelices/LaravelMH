@@ -14,7 +14,8 @@
     
     <!-- Div en dispositivos grandes y pequeños -->
     <div class="md:w-5/12 md:block hidden relative">
-        <iframe class="w-full h-full object-cover z-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23215.640104711196!2d1.7282362004974146!3d41.23116493697484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM0nCsDAyJzA1LjQiTiAxwrAzMCczMy41Ilc!5e0!3m2!1sen!2sus!4v1638561261762!5m2!1sen!2sus" width="940" height="350" style="border:0"></iframe>
+        <iframe class="w-full h-full object-cover z-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000.888639591206!2d1.7260894999999998!3d41.2241972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a386e33e206255%3A0x690a371d65bf15c6!2sPla%C3%A7a%20de%20la%20Vila%2C%2008800%20Vilanova%20i%20la%20Geltr%C3%BA%2C%20Barcelona!5e0!3m2!1sca!2ses!4v1701797822619!5m2!1sca!2ses"  style="border:0"></iframe>
+        
     </div>
 </div>
     @include('partials.nav')     
