@@ -28,7 +28,7 @@ use App\Http\Controllers\LanguageController;
 // });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
+Route::get('/about_hector', [HomeController::class, 'aboutus'])->name('aboutus');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

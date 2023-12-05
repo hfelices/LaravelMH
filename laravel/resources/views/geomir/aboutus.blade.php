@@ -1,28 +1,80 @@
 <x-geomir-layout>
     @section('title', 'Home')
 @section('content')
+<style>
+  .imagen:hover{
+    transform: rotate(1080deg);
+    transition: transform 0.9s ease-in-out;
+  }
+  .imagen{
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+    
+  }
+  .imagen .divertida{
+    display:none;
+   
+  }
+  .imagen .seria{
+   
+    display:block;
+  }
+  .imagen:hover .seria{
+   
+    display:none;
+  }
+  .imagen:hover .divertida{
+    
+    display:block;
+  }
+  .divertida{
+    filter: contrast(150%);
+  }
+  .seria{
+    filter: grayscale(100%);
+  }
+
+  #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 80%;
+      text-align: center;
+    }
+</style>
+
 <div class="relative h-screen">
-  <!-- Contenido del iframe -->
+  
   <canvas id="matrix" class="h-full w-full invisible" style="background: #000; display: block;">
   </canvas> 
-  <!-- Contenido de las cards -->
-  <div class="flex items-center mx-20 justify-around h-full absolute  inset-0">
+
+  <div class="flex md:flex-row flex-col items-center mx-20 justify-around h-full absolute  inset-0">
     
-    <div class="max-w-xl bg-white p-4 rounded-md shadow-md" id="imagen">
-      <img  src="https://img.nbc.com/files/images/2013/11/12/dwight-500x500.jpg" alt="Imagen 1" class="mb-4 rounded-md">
-      <h2 class="text-xl font-bold mb-2">Título de la Card 1</h2>
-      <p class="text-gray-700">Descripción de la Card 1.</p>
+    <div class="max-w-xl bg-white p-4 rounded-md shadow-md imagen" id="imagen" >
+      <img  src="https://img.nbc.com/files/images/2013/11/12/dwight-500x500.jpg" alt="Imagen 1" class="mb-4 rounded-md   seria">
+      <img  src="https://i.pinimg.com/originals/74/30/bd/7430bd5c400e0ed5613afa2842fda124.gif" alt="Imagen 1" class="mb-4  rounded-md  divertida">
+      <h2 class="text-xl font-bold mb-2">Dwight Schrute</h2>
+      <p class="text-gray-700">Assistant Regional Manager</p>
       <audio id="audio" src='{{ asset("audio/Rick Astley - Never Gonna Give You Up (Official Music Video).mp3")}}'></audio>
     </div>
-    <div class="max-w-xl bg-white p-4 rounded-md shadow-md">
-      <img src="https://www.paperflite.com/sites/default/files/inline-images/tumblr_df754ac3e0c09bc5957dd9b17c08dba8_af889488_400.gif" alt="Imagen 1" class="mb-4 rounded-md">
-      <h2 class="text-xl font-bold mb-2">Título de la Card 1</h2>
-      <p class="text-gray-700">Descripción de la Card 1.</p>
-    </div>
-    <div class="max-w-xl bg-white p-4 rounded-md shadow-md">
-      <img src="https://forbes.es/wp-content/uploads/2022/08/Never-Gonna-Give-You-Up-Rick-Astley.jpg" alt="Imagen 1" class="mb-4 rounded-md">
-      <h2 class="text-xl font-bold mb-2">Título de la Card 1</h2>
-      <p class="text-gray-700">Descripción de la Card 1.</p>
+    
+   
+    <div id="modal">
+      <div id="modal-content">
+        <iframe  class="h-60 w-96" src="https://www.youtube.com/embed/6stlCkUDG_s?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
     
   </div>
@@ -45,10 +97,10 @@
         matrix.classList.remove("invisible");
     });
 
-    // imagen.addEventListener("mouseout", function () {
-    //     audio.pause();
-    //     audio.currentTime = 0; 
-    // });
+    imagen.addEventListener("mouseout", function () {
+        audio.pause();
+        // audio.currentTime = 0; 
+    });
 
 
 
@@ -91,6 +143,20 @@
         // Loop the animation
         setInterval(draw, 33);
 });
+
+
+
+
+document.getElementById('imagen').addEventListener('click', function() {
+    document.getElementById('modal').style.display = 'flex';
+  });
+
+  
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
   </script>
 @endsection
 
