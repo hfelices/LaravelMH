@@ -25,7 +25,7 @@ class PlaceController extends Controller
             // Realizar la búsqueda en la base de datos
             $places = Place::withCount('favorited')
             ->where('description', 'like', "%$searchTerm%")
-            ->paginate(5);
+            ->paginate(10);
             foreach ($places->items() as $place) {
                 $favorited = Favorite::where('place_id', $place->id)
                             ->where('user_id', \Auth::user()->id)
@@ -33,10 +33,10 @@ class PlaceController extends Controller
                 $favoritedByUser = ($favorited->count() > 0) ? true : false;
                 $place->favoritedByUser = $favoritedByUser;
             }
-            return view("places.index", compact('places'));
+            return view('home', compact('places'));
         } else {
             $places =  Place::withCount('favorited')
-                            ->paginate(5);
+                            ->paginate(10);
             
             foreach ($places->items() as $place) {
                 $favorited = Favorite::where('place_id', $place->id)
@@ -45,7 +45,7 @@ class PlaceController extends Controller
                 $favoritedByUser = ($favorited->count() > 0) ? true : false;
                 $place->favoritedByUser = $favoritedByUser;
             }
-            return view("places.index", compact('places'));
+            return view('home', compact('places'));
         }
     }
  

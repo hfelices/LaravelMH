@@ -11,7 +11,7 @@
 
     @include('partials.flash')
 
-    <form method="post" action="{{ route('places.store') }}" enctype="multipart/form-data" class="max-w-md mx-auto">
+    <form id="create-place-form" method="post" action="{{ route('places.store') }}" enctype="multipart/form-data" class="max-w-md mx-auto">
         @csrf
         @if(session('fails'))
         <div class="alert alert-fails">
@@ -20,23 +20,28 @@
         @endif
         <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Name') }}:</label>
-            <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="name"/>
+            <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="name" required/>
+            <div id=nameError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Description') }}:</label>
-            <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="description"/>
+            <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="description" required/>
+            <div id=descriptionError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="upload" class="block text-gray-700 text-sm font-bold mb-2">{{ __('File') }}:</label>
-            <input type="file" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="upload"/>
+            <input type="file" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="upload" required/>
+            <div id=uploadError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="latitude" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Latitude') }}:</label>
-            <input type="number" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="latitude"/>
+            <input type="number" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="latitude" required/>
+            <div id=latitudeError class="text-red-500"> </div>
         </div>
         <div class="mb-4">
             <label for="longitude" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Longitude') }}:</label>
-            <input type="number" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="longitude"/>
+            <input type="number" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="longitude" required/>
+            <div id=longitudeError class="text-red-500"> </div>
         </div>
         @can('create',App\Models\Place::class)
         <div class="flex space-x-4">
