@@ -2,14 +2,21 @@
     @section('title', 'Home')
 @section('content')
 <style>
-  .imagen:hover{
+  .imagen-hector:hover{
     transform: rotate(1080deg);
     transition: transform 0.9s ease-in-out;
   }
-  .imagen{
+  .imagen-hector{
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out; 
+  }
+  .imagen-mark:hover{
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+  }
+  .imagen-mark{
     transform: rotate(0deg);
     transition: transform 0.3s ease-in-out;
-    
   }
   .imagen .divertida{
     display:none;
@@ -34,7 +41,7 @@
     filter: grayscale(100%);
   }
 
-  #modal {
+  #modal-mark,#modal-hector {
       display: none;
       position: fixed;
       top: 0;
@@ -46,7 +53,7 @@
       align-items: center;
     }
 
-    #modal-content {
+    #modal-mark-content,#modal-hector-content  {
       background: #fff;
       padding: 20px;
       border-radius: 8px;
@@ -62,21 +69,40 @@
 
   <div class="flex md:flex-row flex-col items-center mx-20 justify-around h-full absolute  inset-0">
     
-    <div class="max-w-xl bg-white p-4 rounded-md shadow-md imagen" id="imagen" >
+    <div class="max-w-xl bg-white p-4 rounded-md shadow-md imagen imagen-hector" id="imagen-hector" >
       <img  src="https://img.nbc.com/files/images/2013/11/12/dwight-500x500.jpg" alt="Imagen 1" class="mb-4 rounded-md   seria">
       <img  src="https://i.pinimg.com/originals/74/30/bd/7430bd5c400e0ed5613afa2842fda124.gif" alt="Imagen 1" class="mb-4  rounded-md  divertida">
       <h2 class="text-xl font-bold mb-2">Dwight Schrute</h2>
       <p class="text-gray-700">Assistant Regional Manager</p>
-      <audio id="audio" src='{{ asset("audio/Rick Astley - Never Gonna Give You Up (Official Music Video).mp3")}}'></audio>
+      <audio id="audio-hector" src='{{ asset("audio/Rick Astley - Never Gonna Give You Up (Official Music Video).mp3")}}'></audio>
     </div>
     
    
-    <div id="modal">
-      <div id="modal-content">
+    <div id="modal-hector">
+      <div id="modal-hector-content">
         <iframe  class="h-60 w-96" src="https://www.youtube.com/embed/6stlCkUDG_s?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-    
+    <audio id="audio-mark">
+      <source src='{{ asset("audio/All Devouring Narwhal  Shadow Phase - Genshin Impact 4.2 OST.mp3")}}'>
+    </audio>
+    <div class="max-w-xl bg-white p-4 rounded-md shadow-md" id="imagen-mark">
+      <div class="imagen imagen-mark w-1/1">
+        <img  src='{{ asset("img/foto_divertida.jpg") }}' alt="Imagen 1" class="mb-4 rounded-md divertida">
+        <img src='{{ asset("img/foto_seria.jpg") }}' alt="Imagen 2" class="mb-4 rounded-md seria">
+      </div>
+      <h2 class="text-xl font-bold mb-2">Mark López Morales</h2>
+      <p class="text-gray-700 divertida">Definitivamente una descripción.</p>
+    </div>
+    <div id="modal-mark">
+    <div id="modal-mark-content">
+      <iframe
+        width="800"
+        height="450"
+        src="https://www.youtube.com/embed/PQ7b6frW_vY?autoplay=1&mute=1"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
@@ -86,20 +112,29 @@
     <script>
 
       document.addEventListener("DOMContentLoaded", function () {
-    var imagen = document.getElementById("imagen");
-    var audio = document.getElementById("audio");
+    var imagenHector = document.getElementById("imagen-hector");
+    var imagenMark = document.getElementById("imagen-mark");
+    var audioHector = document.getElementById("audio-hector");
+    var audioMark = document.getElementById("audio-mark");
     var matrix = document.getElementById("matrix");
 
-
-    imagen.addEventListener("mouseover", function () {
-        audio.play();
+    imagenMark.addEventListener("mouseover", function () {
+        audioMark.play();
         matrix.classList.remove("invisible");
     });
 
-    imagen.addEventListener("mouseout", function () {
-        audio.pause();
-        // audio.currentTime = 0; 
+    imagenMark.addEventListener("mouseout", function () {
+        audioMark.pause();
+      });
+
+    imagenHector.addEventListener("mouseover", function () {
+        audioHector.play();
+        matrix.classList.remove("invisible");
     });
+
+    imagenHector.addEventListener("mouseout", function () {
+        audioHector.pause();
+      });
 
 
 
@@ -144,14 +179,23 @@
 });
 
 
-
-
-document.getElementById('imagen').addEventListener('click', function() {
-    document.getElementById('modal').style.display = 'flex';
+document.getElementById('imagen-mark').addEventListener('click', function() {
+    document.getElementById('modal-hector').style.display = 'flex';
   });
 
   
-  document.getElementById('modal').addEventListener('click', function(e) {
+  document.getElementById('modal-mark').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
+
+document.getElementById('imagen-hector').addEventListener('click', function() {
+    document.getElementById('modal-hector').style.display = 'flex';
+  });
+
+  
+  document.getElementById('modal-hector').addEventListener('click', function(e) {
     if (e.target === this) {
       this.style.display = 'none';
     }
