@@ -85,7 +85,6 @@
      
     <script>
 
-
       document.addEventListener("DOMContentLoaded", function () {
     var imagen = document.getElementById("imagen");
     var audio = document.getElementById("audio");
