@@ -71,8 +71,8 @@
     
 
   <div class="max-w-xl bg-white p-4 rounded-md shadow-md imagen imagen-hector" id="imagen-hector" >
-      <img  src="https://img.nbc.com/files/images/2013/11/12/dwight-500x500.jpg" alt="Imagen 1" class="mb-4 rounded-md   seria">
-      <img  src="https://i.pinimg.com/originals/74/30/bd/7430bd5c400e0ed5613afa2842fda124.gif" alt="Imagen 1" class="mb-4  rounded-md  divertida">
+      <img  src="https://img.nbc.com/files/images/2013/11/12/dwight-500x500.jpg" alt="Imagen 1" class="h-96 w-auto mb-4 rounded-md   seria">
+      <img  src="https://i.pinimg.com/originals/74/30/bd/7430bd5c400e0ed5613afa2842fda124.gif" alt="Imagen 1" class=" h-96 w-auto mb-4  rounded-md  divertida">
       <h2 class="text-xl font-bold mb-2">Dwight Schrute</h2>
       <p class="text-gray-700">Assistant Regional Manager</p>
       <audio id="audio-hector" src='{{ asset("audio/Rick Astley - Never Gonna Give You Up (Official Music Video).mp3")}}'></audio>
@@ -80,8 +80,8 @@
     
   <div class="max-w-xl bg-white p-4 rounded-md shadow-md" id="imagen-mark">
     <div class="imagen imagen-mark">
-      <img  src='{{ asset("img/foto_divertida.jpg") }}' alt="Imagen 1" class="mb-4 rounded-md divertida">
-      <img src='{{ asset("img/foto_seria.jpg") }}' alt="Imagen 2" class="mb-4 rounded-md seria">
+      <img  src='{{ asset("img/foto_divertida.jpg") }}' alt="Imagen 1" class="h-96 w-auto mb-4 rounded-md divertida">
+      <img src='{{ asset("img/foto_seria.jpg") }}' alt="Imagen 2" class="h-96 w-auto mb-4 rounded-md seria">
     </div>
     <h2 class="text-xl font-bold mb-2">Mark López Morales</h2>
     <p class="text-gray-700">Definitivamente una descripción.</p>
