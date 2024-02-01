@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FileController;
-
+use App\Http\Controllers\Api\FileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,9 +17,5 @@ use App\Http\Controllers\FileController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('files',[ FileController::class, 'index']);
-Route::get('files',[ FileController::class, 'show']);
-Route::post('files',[ FileController::class, 'store']);
-Route::put('files',[ FileController::class, 'update']);
-Route::delete('files',[ FileController::class, 'destroy']);
-Route::resource('/api/files', FileController::class);
+
+Route::apiResource('files', FileController::class);
