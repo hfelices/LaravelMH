@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
+use App\Http\Controllers\Api\TokenController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('files', FileController::class);
+Route::apiResource('users', TokenController::class);
+Route::post('files/{file}', [FileController::class, 'update_workaround']);
