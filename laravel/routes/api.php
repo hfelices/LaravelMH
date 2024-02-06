@@ -15,10 +15,18 @@ use App\Http\Controllers\Api\TokenController;
 |
 */
 
+Route::middleware('auth:sanctum')->get('/logout', function (Request $request) {
+    return $request->logout();
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('guest')->get('/register', function (Request $request) {
+    return $request->register();
+});
+Route::middleware('guest')->get('/login', function (Request $request) {
+    return $request->login();
+});
 
 Route::apiResource('files', FileController::class);
-Route::apiResource('users', TokenController::class);
 Route::post('files/{file}', [FileController::class, 'update_workaround']);
