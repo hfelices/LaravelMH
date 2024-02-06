@@ -151,7 +151,7 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        $oldfilePath = $place->file->filepath;
+    $oldfilePath = $place->file->filepath;
         
        $validatedData = $request->validate([
         'upload' => 'nullable|mimes:gif,jpeg,jpg,png|max:1024'
