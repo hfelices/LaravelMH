@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
+use App\Http\Controllers\Api\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +24,6 @@ Route::middleware('guest')->post('/login',  [TokenController::class, 'login']);
 
 Route::apiResource('files', FileController::class);
 Route::post('files/{file}', [FileController::class, 'update_workaround']);
+
+Route::apiResource('posts', PostController::class);
+Route::post('posts/{post}', [PostController::class, 'update_workaround']);
