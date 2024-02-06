@@ -27,7 +27,7 @@ class TokenTest extends TestCase
        self::$testUser = (object) [
            "name"      => "{$name}",
            "email"     => "{$name}@mailinator.com",
-           "password"  => "12345678"
+           "password"  => "!Hola1234"
        ];
    }
 
@@ -57,7 +57,7 @@ class TokenTest extends TestCase
        $response = $this->postJson('/api/register', [
            "name"      => "",
            "email"     => "mailinator.com",
-           "password"  => "12345678",
+           "password"  => "!Hola1234",
        ]);
        // Check response
        $response->assertStatus(422);
@@ -104,7 +104,7 @@ class TokenTest extends TestCase
        // Login using API web service
        $response = $this->postJson('/api/login', [
            "email"     => "notexists@mailinator.com",
-           "password"  => "12345678",
+           "password"  => "!Hola1234",
        ]);
        // Check response
        $response->assertStatus(401);

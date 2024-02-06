@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+
 
 class TokenController extends Controller
 {
@@ -47,44 +54,48 @@ class TokenController extends Controller
             ], 401);
         }
     }
- 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function logout(Request $request)
     {
-        //
+       if (null != $request->user()->tokens()) {
+        $request->user()->tokens()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User logged out successfully'
+        ]);
+       }else{
+        return response()->json([
+            'success' => false,
+            'message' => 'User logged out unauthorized'
+        ]);
+       } 
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        //
+       $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required',  Rules\Password::defaults()],
+        ]);
+        
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role_id' => 1
+        ]);
+    
+        $token = $user->createToken('authToken')->plainTextToken;
+    
+        return response()->json([
+            'success'   => true,
+            'authToken' => $token,
+            'tokenType' => 'Bearer',
+            'message'   => 'User registered successfully'
+        ], 200);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+   
 }
