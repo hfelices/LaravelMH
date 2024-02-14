@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\place;
 use App\Models\File;
+use App\Models\Favorite;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 class PlaceController extends Controller
@@ -41,7 +43,6 @@ class PlaceController extends Controller
             'upload' => 'required|mimes:gif,jpeg,jpg,png|max:2048',
             'longitude' => 'required',
             'latitude' => 'required',
-            'author_id' => 'required',
         ]);
         $upload = $request->file('upload');
         $fileName = $upload->getClientOriginalName();
@@ -64,7 +65,7 @@ class PlaceController extends Controller
                     'file_id' => $file_id->id,
                     'latitude' => $request->input('latitude'),
                     'longitude' => $request->input('longitude'),
-                    'author_id' => $request->input('author_id'),
+                    'author_id' => auth()->user()->id,
                 ]);
                 return response()->json([
                     'success' => true,
@@ -142,7 +143,6 @@ class PlaceController extends Controller
                     'file_id' => $file_id->id,
                     'latitude' => $request->input('latitude'),
                     'longitude' => $request->input('longitude'),
-                    'author_id' => $request->input('author_id'),
                 ]);
                 return response()->json([
                     'success' => true,
@@ -164,7 +164,6 @@ class PlaceController extends Controller
                     'file_id' => $file_id->id,
                     'latitude' => $request->input('latitude'),
                     'longitude' => $request->input('longitude'),
-                    'author_id' => $request->input('author_id'),
                 ]);
                 return response()->json([
                     'success' => true,
@@ -210,6 +209,60 @@ class PlaceController extends Controller
         }
     }
 
+    public function favorite(Request $request, string $id)
+    {
+        $place = Place::where('id',$id)->first();
+        if ($place){
+            $author = User::where('id', $request->user()->id)->first();
+            if ($author){
+                $favorite = Favorite::where('place_id',$id)->where('user_id', $request->user()->id)->first();
+                if ($favorite){
+                    try{
+                        $favorite->delete();
+                        return response()->json([
+                            'success' => true,
+                            'data' => 'favorite eliminado' . $favorite,
+                        ], 200);
+                    } catch (Exception $e){
+                            return response()->json([
+                                'success' => false,
+                                'message' => 'Error al eliminar el favorite ' . $e,
+                            ], 404);
+
+                        }
+                } else{
+                    $favorite = Favorite::create([
+                        'user_id' => $request->user()->id,
+                        'place_id' => $id,
+                    ]);
+                    if ($favorite){
+                        return response()->json([
+                            'success' => true,
+                            'data' => 'favorite creado' . $favorite,
+                        ], 200);
+                    }
+                    else{
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Error al crear el favorite',
+                        ], 404);
+                    }
+                }
+            } else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Author no encontrado',
+                ], 404);
+
+            }
+        } else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Place no encontrado',
+            ], 404);
+        }
+        
+    }
     //metodo update API
     public function update_workaround(Request $request, $id)
     {
