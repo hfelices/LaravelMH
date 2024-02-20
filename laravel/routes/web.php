@@ -9,6 +9,7 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,9 @@ Route::post('/places/{place}/favorite', [PlaceController::class, 'favorite'])->n
 
 Route::post('/posts/{post}/likes', [PostController::class, 'like'])->name('posts.like')->middleware(['auth', ]);
 Route::delete('/posts/{post}/likes',[ PostController::class, 'unlike'])->name('posts.unlike')->middleware(['auth', ]);
+
+Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store')->middleware(['auth', ]);
+Route::delete('/posts/{post}/comment', [CommentController::class, 'destroy'])->name('comment.destroy')->middleware(['auth', ]);
 
 Route::post('/places/{place}/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware(['auth', ]);
 Route::delete('/places/{review}/reviews',[ ReviewController::class, 'destroy'])->name('reviews.destroy')->middleware(['auth', ]);

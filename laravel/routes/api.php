@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\CommentController;
+
 use App\Http\Controllers\Api\PlaceController;
 use App\Http\Controllers\Api\ReviewController;
 /*
@@ -29,3 +32,9 @@ Route::middleware('auth:sanctum')->post('/places/{place}/favorites', [PlaceContr
 Route::middleware('auth:sanctum')->apiResource('/places/{place}/reviews', ReviewController::class);
 
 Route::post('files/{file}', [FileController::class, 'update_workaround']);
+
+Route::middleware('auth:sanctum')->apiResource('posts', PostController::class);
+Route::middleware('auth:sanctum')->post('posts/{post}', [PostController::class, 'update_workaround']);
+Route::middleware('auth:sanctum')->post('posts/{post}/likes', [PostController::class, 'like']);
+Route::middleware('auth:sanctum')->delete('posts/{post}/likes', [PostController::class, 'unlike']);
+Route::middleware('auth:sanctum')->apiResource('/posts/{post}/comment', CommentController::class);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -137,13 +138,14 @@ class PostController extends Controller
     {
         $user_id = Auth::user()->id;
         $likes = Like::where('post_id', $post->id)->get();
+        $comments = Comment::where('post_id', $post->id)->get();
         $liked = Like::where('post_id', $post->id)
                     ->where('user_id', $user_id)
                     ->get();
 
         $likesNum = $likes->count();
         $likedByUser = ($liked->count() > 0) ? true : false;
-    return view("posts.show")->with(['post' => $post,'likes' => $likesNum , 'likedByUser' => $likedByUser]);
+    return view("posts.show")->with(['post' => $post,'likes' => $likesNum , 'likedByUser' => $likedByUser, 'comments' => $comments ]);
     }   
 
     /**
@@ -164,86 +166,86 @@ class PostController extends Controller
         
         // Validar fitxer
        $validatedData = $request->validate([
-        'body' => 'required',
-        'latitude' => 'required',
-        'longitude' => 'required',
-        'upload' => 'nullable|mimes:gif,jpeg,jpg,png|max:1024'
-     ]);
-
-     if ($request->hasFile('upload')) {
-         // Obtenir dades del fitxer
-       $upload = $request->file('upload');
-       $fileName = $upload->getClientOriginalName();
-       $fileSize = $upload->getSize();
-       \Log::debug("Storing file '{$fileName}' ($fileSize)...");
-        
-
-
-        // Pujar fitxer al disc dur
-        $uploadName = time() . '_' . $fileName;
-        $filePath = $upload->storeAs(
-            'uploads',      // Path
-            $uploadName ,   // Filename
-            'public'        // Disk
-        );
-        
-       if (\Storage::disk('public')->exists($filePath)) {
-            \Log::debug("Disk storage OK");
-            $fullPath = \Storage::disk('public')->path($filePath);
-            \Log::debug("File saved at {$fullPath}");
-            // Desar dades a BD
-            $post->file->update([
-                'filepath' => $filePath,
-                'filesize' => $fileSize,
-            ]);
-            $newFile = File::where('filepath', $filePath)
-                                ->where('filesize', $fileSize)
-                                ->first();
-
-            if ($newFile) {
-                $post->update([
-                    'body'=>$request->input('body'),
-                    'file_id'=>$newFile->id,
-                    'latitude'=>$request->input('latitude'),
-                    'longitude'=>$request->input('longitude'),
-                    // 'visibility_id',
-                    'author_id'=>$request->user()->id,     
-                ]);
-                \Log::debug("DB storage OK");
-
-                \Storage::disk('public')->delete($oldfilePath);
-                // Patró PRG amb missatge d'èxit
-                return redirect()->route('posts.show', $post)
-                    ->with('success', __('File successfully saved'));
-            }else{
-                return redirect()->route("posts.edit",$post)
-            ->with('error', __('ERROR uploading file'));
-            }
-
-        }else{
-           
-            \Log::debug("Disk storage FAILS");
-            // Patró PRG amb missatge d'error
-            
-        }
-        
-        
-    }else{
-        $post->update([
-            'body'=>$request->input('body'),
-            'file_id'=>$post->file->id,
-            'latitude'=>$request->input('latitude'),
-            'longitude'=>$request->input('longitude'),
-            // 'visibility_id',
-            'author_id'=>$request->user()->id,     
+            'body' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'upload' => 'nullable|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
+
+        if ($request->hasFile('upload')) {
+         // Obtenir dades del fitxer
+            $upload = $request->file('upload');
+            $fileName = $upload->getClientOriginalName();
+            $fileSize = $upload->getSize();
+            \Log::debug("Storing file '{$fileName}' ($fileSize)...");
+                
+
+
+            // Pujar fitxer al disc dur
+            $uploadName = time() . '_' . $fileName;
+            $filePath = $upload->storeAs(
+                'uploads',      // Path
+                $uploadName ,   // Filename
+                'public'        // Disk
+            );
+            
+            if (\Storage::disk('public')->exists($filePath)) {
+                \Log::debug("Disk storage OK");
+                $fullPath = \Storage::disk('public')->path($filePath);
+                \Log::debug("File saved at {$fullPath}");
+                // Desar dades a BD
+                $post->file->update([
+                    'filepath' => $filePath,
+                    'filesize' => $fileSize,
+                ]);
+                $newFile = File::where('filepath', $filePath)
+                                    ->where('filesize', $fileSize)
+                                    ->first();
+
+                if ($newFile) {
+                    $post->update([
+                        'body'=>$request->input('body'),
+                        'file_id'=>$newFile->id,
+                        'latitude'=>$request->input('latitude'),
+                        'longitude'=>$request->input('longitude'),
+                        // 'visibility_id',
+                        'author_id'=>$request->user()->id,     
+                    ]);
+                    \Log::debug("DB storage OK");
+
+                    \Storage::disk('public')->delete($oldfilePath);
+                    // Patró PRG amb missatge d'èxit
+                    return redirect()->route('posts.show', $post)
+                        ->with('success', __('File successfully saved'));
+                }else{
+                    return redirect()->route("posts.edit",$post)
+                ->with('error', __('ERROR uploading file'));
+                }
+
+            }else{
+            
+                \Log::debug("Disk storage FAILS");
+                // Patró PRG amb missatge d'error
+                
+            }
         
         
-       
-       
+        }else{
+            $post->update([
+                'body'=>$request->input('body'),
+                'file_id'=>$post->file->id,
+                'latitude'=>$request->input('latitude'),
+                'longitude'=>$request->input('longitude'),
+                // 'visibility_id',
+                'author_id'=>$request->user()->id,     
+            ]);
+            
+            
         
-        return redirect()->route('posts.show', $post)
-            ->with('success', __('File successfully saved')); 
+        
+            
+            return redirect()->route('posts.show', $post)
+                ->with('success', __('File successfully saved')); 
         }
     }
 
