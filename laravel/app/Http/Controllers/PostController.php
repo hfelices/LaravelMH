@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -137,13 +138,14 @@ class PostController extends Controller
     {
         $user_id = Auth::user()->id;
         $likes = Like::where('post_id', $post->id)->get();
+        $comments = Comment::where('post_id', $post->id)->get();
         $liked = Like::where('post_id', $post->id)
                     ->where('user_id', $user_id)
                     ->get();
 
         $likesNum = $likes->count();
         $likedByUser = ($liked->count() > 0) ? true : false;
-    return view("posts.show")->with(['post' => $post,'likes' => $likesNum , 'likedByUser' => $likedByUser]);
+    return view("posts.show")->with(['post' => $post,'likes' => $likesNum , 'likedByUser' => $likedByUser, 'comments' => $comments ]);
     }   
 
     /**

@@ -66,7 +66,10 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(Role::class);
     }
  
-    
+    public function comments()
+    {
+    return $this->hasMany(Comment::class, 'user_id');
+    }
     public function canAccessFilament(): bool
     {
         

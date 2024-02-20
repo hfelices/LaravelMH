@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\File;
+use App\Models\User;
+use App\Models\Like;
 
 
 class PostController extends Controller
@@ -76,7 +78,7 @@ class PostController extends Controller
                     'latitude'=>$request->input('latitude'),
                     'longitude'=>$request->input('longitude'),
                     // 'visibility_id',
-                    'author_id'=>$request->input('author_id'),     
+                    'author_id'=>$request->user()->id,     
                     ]);
                     \Log::debug("DB storage OK");
                     // Patró PRG amb missatge d'èxit
@@ -172,8 +174,7 @@ class PostController extends Controller
                             'file_id'=>$newFile->id,
                             'latitude'=>$request->input('latitude'),
                             'longitude'=>$request->input('longitude'),
-                            // 'visibility_id',
-                            'author_id'=>$request->input('author_id'),     
+                            // 'visibility_id',     
                         ]);
     
                         \Storage::disk('public')->delete($oldfilePath);
@@ -181,7 +182,7 @@ class PostController extends Controller
                         return response()->json([
                             'success' => true,
                             'data'    => $post
-                        ], 201);
+                        ], 200);
                     }else{
                         return response()->json([
                             'success'  => false,
@@ -205,8 +206,7 @@ class PostController extends Controller
                     'file_id'=>$post->file->id,
                     'latitude'=>$request->input('latitude'),
                     'longitude'=>$request->input('longitude'),
-                    // 'visibility_id',
-                    'author_id'=>$request->input('author_id'),     
+                    // 'visibility_id',     
                 ]);
                 
                 
@@ -222,7 +222,7 @@ class PostController extends Controller
             return response()->json([
                 'success'  => false,
                 'message' => 'Error uploading post'
-            ], 500);
+            ], 404);
         }
         
     }
@@ -243,7 +243,7 @@ class PostController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data' => $file,
+                'data' => $post,
             ], 200);
         } else {
             return response()->json([
@@ -257,5 +257,95 @@ class PostController extends Controller
     public function update_workaround(Request $request, $id)
     {
         return $this->update($request, $id);
+    }
+
+    public function like(Request $request, String $id)
+    {
+        // $this->authorize('create', $post);
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+            $user = User::where('id', $request->user()->id)->first(); 
+            if ($user) {
+                $like = Like::where('user_id', $request->user()->id)->where('post_id',$id )->first();
+                if (!$like) {
+                    $new_like = Like::create([
+                        'user_id' => $request->user()->id,
+                        'post_id' => $id,
+                    ]);                
+                    if ($new_like) {
+                        return response()->json([
+                            'success' => true,
+                            'data' => $like,
+                        ], 200);
+                    }else{
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Error al crear el like',
+                        ], 404);
+                    }
+                }else{
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Error al crear el like, el like ya existe',
+                    ], 404);
+                }
+                
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error al crear el like, usuario no encontrado',
+                ], 404);
+            }
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al crear el like, post no encontrado',
+            ], 404);
+        }
+        
+        
+        
+    }
+
+    public function unlike(Request $request, String $id)
+    {
+        // $this->authorize('create', $post);
+        // $user_id = Auth::user()->id;
+
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+
+            $user = User::where('id', $request->user()->id)->first();
+            if ($user) {
+                $like = Like::where('post_id', $post->id)
+                ->where('user_id', $request->user()->id)
+                ->first();
+    
+                if ($like) {
+                    $like->delete();
+                    return response()->json([
+                        'success' => true,
+                        'data' => $like,
+                    ], 200);
+                }else{
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Archivo no encontrado',
+                    ], 404);
+                }
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Usuario no encontrado',
+                ], 404);
+            }
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Post no encontrado',
+            ], 404);
+        }
+        
+        
     }
 }
