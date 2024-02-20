@@ -96,7 +96,7 @@ class ReviewController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'review no encontrado',
+                'message' => 'Review no encontrado',
             ], 404);
         }
     }
