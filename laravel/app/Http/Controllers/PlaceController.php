@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use App\Models\Place;
+use App\Models\Review;
 use App\Models\File;
 use Illuminate\Http\Request;
 
@@ -126,6 +127,7 @@ class PlaceController extends Controller
     public function show(Request $request, Place $place)
     {
         $favorited = Favorite::where('place_id',$place->id)->where('user_id', $request->user()->id)->get();
+        $reviews = Review::where('place_id',$place->id)->get();
         $userFav = ($favorited->count() > 0) ? true : false;     
         $favorites = Favorite::where('place_id',$place->id)->get();
         if ($favorites){
@@ -134,7 +136,7 @@ class PlaceController extends Controller
             $favorites = 0;
         }
         
-        return view("places.show")->with(['place' => $place, 'favorites' => $favorites, 'userFav' => $userFav]);
+        return view("places.show")->with(['place' => $place, 'favorites' => $favorites, 'userFav' => $userFav, 'reviews' => $reviews]);
     }
 
     /**

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\PlaceController;
+use App\Http\Controllers\Api\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,4 +26,6 @@ Route::apiResource('files', FileController::class);
 Route::middleware('auth:sanctum')->apiResource('places', PlaceController::class);
 Route::middleware('auth:sanctum')->post('places/{place}', [PlaceController::class, 'update_workaround']);
 Route::middleware('auth:sanctum')->post('/places/{place}/favorites', [PlaceController::class, 'favorite'])->name('places.favorite');
+Route::middleware('auth:sanctum')->apiResource('/places/{place}/reviews', ReviewController::class);
+
 Route::post('files/{file}', [FileController::class, 'update_workaround']);

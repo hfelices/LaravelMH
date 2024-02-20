@@ -58,4 +58,43 @@
             
         </div>
     </div>
+    <div class="mt-2 ml-20 pb-20 items-center justify-center">
+    <h1>Comentarios</h1>
+    <form action="{{ route('reviews.store', $place->id) }}" method="POST" style="display: inline;">
+    @csrf
+    <div class="mb-4">
+            <label for="body" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Body') }}:</label>
+            <input type="text" class="form-input py-2 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="body" required/>
+            <div id=descriptionError class="text-red-500"> </div>
+        </div>
+    <button type="submit" class="bg-yellow-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+        Añadir comentario
+    </button>
+</form>
+    <hr>
+    @if ($reviews->count() > 0)
+        
+        @foreach($reviews as $index => $review)
+        <div class="bg-white mx-auto w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/2 border border-gray-300 rounded-lg p-4  mt-6">
+            <h2>{{$review->user->name }}</h2>
+            <p>{{$review->body}}</p>
+            
+            @can('delete', $review)
+                <form action="{{ route('reviews.destroy', $review->id)  }}" method="POST" onsubmit="return confirm('¿Estás seguro?')" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
+                    {{ __('Delete') }}
+                    </button>
+                    
+                </form>
+
+                @endcan
+        </div>
+        @endforeach
+
+    @else
+    <h1>No hay comentarios aún</h1>
+    @endif
+</div>
 </x-app-layout>
